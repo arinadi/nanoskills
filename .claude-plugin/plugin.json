@@ -1,0 +1,9 @@
+{
+  "name": "nanocrt",
+  "description": "nano Content Research Tool. Turns a video content idea into a word-for-word two-column A/V script with a shot list, through five gated phases: intake, research, outline, script, handoff.",
+  "author": {
+    "name": "Arinadi Rohmad"
+  },
+  "homepage": "https://github.com/arinadi/nanoCRT",
+  "license": "MIT"
+}

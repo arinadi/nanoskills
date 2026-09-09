@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "nanocrt",
+  "owner": {
+    "name": "Arinadi Rohmad"
+  },
+  "description": "Content research skills that turn a video idea into a shootable script. Portable across Claude Code and OpenCode.",
+  "plugins": [
+    {
+      "name": "nanocrt",
+      "source": "./",
+      "description": "nano Content Research Tool. Five-phase workflow with a hard approval gate: intake, research, outline, script, handoff. Produces a two-column A/V script with word-for-word narration and a shot list.",
+      "category": "content"
+    }
+  ]
+}
