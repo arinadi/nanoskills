@@ -45,7 +45,7 @@ The skills, one shape:
 
 | Skill | Start with | End with |
 |---|---|---|
-| **nanocrt** | a video content idea | `script.md` — two-column A/V, word-for-word narration + shot list |
+| **nanocrt** (*nano Content Research Tool*) | a video content idea | `script.md` — two-column A/V, word-for-word narration + shot list |
 | **nanostory** | a folder of travel footage/photos | `script.md` referencing real files + `edit-plan.md` |
 | **nanoprd** | a product idea | `PRD.md`, `architecture.md`, `tasks/` (nanotasks) + `AGENT.md` |
 
@@ -75,7 +75,7 @@ nanostory  (footage -> script+edit) 0 Intake -> 1 Catalog  -> 2 Outline -> 3 Scr
 nanoprd    (idea -> nanotasks)      0 Intake -> 1 PRD -> 2 Architecture -> 3 Decomposition -> 4 Handoff
 ```
 
-- **nanocrt** is *idea-first*. You bring a topic; it researches the facts and the
+- **nanocrt** (*nano Content Research Tool*) is *idea-first*. You bring a topic; it researches the facts and the
   audience, then writes a script you can shoot. `research.md` (topic facts +
   audience/trend/keyword), `outline.md`, `script.md`.
 - **nanostory** is *footage-first*. The footage you already have decides what
