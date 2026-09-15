@@ -1,6 +1,6 @@
 ---
 name: nanocrt
-description: Turn a video content idea into a shootable script — word-for-word narration plus a shot list in the two-column A/V format. Runs a five-phase, approval-gated workflow: intake (topic, mood, angle, keyword, language, duration, audience), research (topic facts + audience/trend/keyword), outline, script, handoff. Use when the user wants to research a video idea, make a video script, write a naskah video, plan video content, or says "buat script video", "research konten video", "naskah video", "video script", "content research".
+description: "Turn a video content idea into a shootable script — word-for-word narration plus a shot list in the two-column A/V format, structured as a story (Five-Part or On-a-Day arc, optional foreshadowing and universal value, via a storytelling reference). Runs a five-phase, approval-gated workflow: intake (topic, mood, angle, keyword, language, duration, audience, plus story structure, universal value, foreshadowing), research (topic facts + audience/trend/keyword), outline, script, handoff. Use when the user wants to research a video idea, make a video script, write a naskah video, plan video content, or says \"buat script video\", \"research konten video\", \"naskah video\", \"video script\", \"content research\"."
 license: MIT
 compatibility: Requires Claude Code or OpenCode v1.0.190+ for native skills. No runtime dependencies; research uses the host agent's web search and fetch tools.
 metadata:
@@ -84,6 +84,12 @@ them is generic.
 The seven mandatory fields: **topic**, **mood**, **angle**, **keyword**,
 **language**, **target duration**, **audience**.
 
+Three optional storytelling fields (see `references/storytelling.md`):
+**story structure** (`five-part` / `on-a-day` / `none`), **universal value**
+(`zero-to-hero` / `underdog` / `transformation` / `redemption` / `none`),
+**foreshadowing** (`on` / `off`). These may be "unset" — the research and outline
+decide, and Phase 4 checks the result.
+
 Also inventory whatever reference material the user pointed at. Read each one and
 summarize one line each: what it contributes and what it settles. A question
 already answered by a reference is not asked again — state what you took and ask
@@ -101,6 +107,8 @@ PHASE 0 COMPLETE - Preferences recorded.
   Angle:       <angle>
   Language:    <language>
   Duration:    <target duration>
+  Structure:   <story_structure, or unset>
+  Foreshadow:  <on/off, or unset>
 
 Written to <project>_crt/meta/context.md
 
@@ -140,10 +148,12 @@ Review it, then reply APPROVED to continue to Phase 2 (Outline).
 
 ### Phase 2 — Outline
 
-**Load:** `references/phase-2-outline.md`, `templates/outline.md`
+**Load:** `references/phase-2-outline.md`, `references/storytelling.md`,
+`templates/outline.md`
 
 Turn the research into a skeleton: a hook, the beats (story or argument steps),
-and an ordered scene list where each scene has a one-sentence summary. Scene count
+and an ordered scene list where each scene has a one-sentence summary. Scenes are
+labelled with the part of the Phase 0 story structure they play. Scene count
 is guided by the target duration from Phase 0.
 
 Write `outline.md`, then stop.
@@ -163,11 +173,15 @@ Review it, then reply APPROVED to continue to Phase 3 (Script).
 
 ### Phase 3 — Script
 
-**Load:** `references/phase-3-script.md`, `templates/script.md`
+**Load:** `references/phase-3-script.md`, `references/storytelling.md`,
+`templates/script.md`
 
 Expand each outline scene into one or more shots. Write the two-column A/V script:
 visual column (camera, on-screen text, B-roll) and audio column (word-for-word
-narration), one row per shot. Compute the runtime line from the audio word count.
+narration), one row per shot. Narration delivers the outline's story arc: a real
+climax, escalating tension, a conclusion that pairs the universal value with a
+concrete detail, and a paid-off foreshadowing clue when enabled. Compute the
+runtime line from the audio word count.
 
 Write `script.md` in the language chosen in Phase 0, then stop.
 
@@ -188,7 +202,9 @@ Review it, then reply APPROVED to continue to Phase 4 (Handoff).
 
 **Load:** `references/phase-4-handoff.md`
 
-Check the finished script against every Phase 0 preference. Report gaps: either
+Check the finished script against every Phase 0 preference — including the three
+storytelling fields (story structure arc, foreshadowing payoff when `on`,
+universal value in the conclusion). Report gaps: either
 "no gaps" or a specific numbered list. This is the final stop.
 
 **Checkpoint:**

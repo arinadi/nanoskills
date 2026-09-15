@@ -1,0 +1,132 @@
+# Phase 0 — Intake and preferences
+
+**Goal:** Capture the user's preferences before touching the assets, and record
+them on disk. Preferences captured here are what make the catalog sharp instead
+of generic.
+
+Five steps, in this order. The order is the point: reading references before
+asking means you ask only what is genuinely undecided.
+
+---
+
+## Step 1 — Record the request verbatim
+
+Write the user's initial request exactly as given. Not your paraphrase — the
+original wording carries intent a summary loses.
+
+## Step 2 — Inventory the footage folder and reference material
+
+Establish what exists on disk. List the footage folder (or the file list the user
+gave) so the manifest in Step 3 is complete — you should not ask about a file you
+have not seen.
+
+Also record every other reference the user pointed at (notes, a previous edit, a
+mood board, an old script). Read each one. For each, record one line: what it
+contributes and what it settles.
+
+| Reference | Contributes | Settles |
+|---|---|---|
+| `raw/` | 47 clips, 2 days of travel | Asset pool for the whole project |
+
+A question already answered by a reference is not asked again. State what you took
+from the file and ask the user to confirm it instead of re-asking.
+
+## Step 3 — Collect the asset manifest
+
+You cannot watch video or inspect photos. The user can. Collect a per-file
+description of every asset in the footage folder — this is the bridge that lets
+you "see" the footage. For each file ask for:
+
+- **What it shows** — subject, place, moment (e.g. "sunset on the beach, waves,
+  golden light")
+- **People** — who is in it, what they are doing (or "none")
+- **Movement** — is the camera still, panning, walking, drone, handheld
+- **Rough quality** — sharp/ok/soft; audio with speech vs ambient vs none (video)
+- **Moment value** — is this a must-use, filler, or maybe-unusable?
+
+Record the manifest verbatim into the context. If the user does not want to
+describe every file, accept a folder-level description and mark the asset-level
+rows as `[needs description]` in Phase 1 — but be explicit that Phase 3 cannot
+anchor a visual row to an undescribed asset.
+
+## Step 4 — Ask the preferences
+
+Ask all of them, as one numbered message so the user sees the whole shape of what
+is undecided. Mark each answer clearly.
+
+### Mandatory
+
+| # | Field | What a usable answer looks like |
+|---|---|---|
+| 1 | **Footage location** | "The folder `raw/` — 47 videos, 12 photos" or an explicit file list |
+| 2 | **Mood** | "Documentary, calm and nostalgic" or "Energetic and upbeat travel" |
+| 3 | **Angle / story goal** | "This trip taught me to slow down" — the position, not the topic |
+| 4 | **Keyword** | The search phrase the video targets, e.g. "liburan ke jepang" |
+| 5 | **Language** | The language the final narration is written in |
+| 6 | **Target duration** | "8 minutes" — drives scene count and runtime checks later |
+| 7 | **Audience** | "Travel vlog viewers 20-35, mobile, want atmosphere not itinerary" |
+
+### Storytelling (optional, three)
+
+Asked with the seven above. Each may legitimately be **"unset"**, meaning "the
+catalog or a later phase decides". See the `nanocrt` skill's
+`references/storytelling.md` for the vocabulary.
+
+| # | Field | A usable answer | Default when unset |
+|---|---|---|---|
+| 8 | **Story structure** | `five-part` \| `on-a-day` \| `none` | `on-a-day` (simplest, most flexible) |
+| 9 | **Universal value** | `zero-to-hero` \| `underdog` \| `transformation` \| `redemption` \| `none` | Let Phase 1/2 infer from the assets |
+| 10 | **Foreshadowing** | `on` \| `off` | `off` unless the trip has a natural reveal |
+
+If a mandatory answer is missing or unusable, ask for that one again specifically.
+Do not proceed with five answers when you have seven.
+
+Wait for the answers. If a preference is genuinely not known by the user (e.g. they
+have no keyword yet), record it as "unset" rather than inventing one — Phase 4 will
+check against it as a gap.
+
+## Step 5 — Write
+
+Select the language default if none was chosen (ask, do not assume). Then write:
+
+```
+<project>_story/meta/context.md
+<project>_story/meta/progress.json
+<project>_story/meta/execution-log.md
+```
+
+The working folder is `<project>_story/` — create it if it does not exist.
+
+`progress.json` phase shape (mirrors nanoCRT, phases 0–4):
+
+```json
+{
+  "project": "<project>",
+  "current_phase": 0,
+  "phases": {
+    "0": { "status": "in_progress", "completed_at": null },
+    "1": { "status": "pending", "completed_at": null },
+    "2": { "status": "pending", "completed_at": null },
+    "3": { "status": "pending", "completed_at": null },
+    "4": { "status": "pending", "completed_at": null }
+  }
+}
+```
+
+---
+
+## What `context.md` must contain
+
+- The initial request, verbatim
+- Footage folder / file list
+- Reference inventory: file, contributes, settles
+- The asset manifest (per-file descriptions), verbatim
+- The seven preferences and their answers, verbatim
+- The three storytelling preferences and their answers (story_structure,
+  universal_value, foreshadowing)
+- The chosen language, explicitly
+- Phase flow record (5 phases)
+
+## Checkpoint
+
+Phase 0 output must be reviewed and approved by the user before Phase 1 begins.

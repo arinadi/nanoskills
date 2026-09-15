@@ -24,6 +24,14 @@
 | Target duration | |
 | Audience | |
 
+## Storytelling preferences
+
+| Field | Answer |
+|---|---|
+| Story structure (five-part / on-a-day / none) | |
+| Universal value (zero-to-hero / underdog / transformation / redemption / none) | |
+| Foreshadowing (on / off) | |
+
 ## Phase flow
 
 0 Intake → 1 Research → 2 Outline → 3 Script → 4 Handoff, approval gate between each.

@@ -1,6 +1,6 @@
 {
   "name": "nanocrt",
-  "description": "nano Content Research Tool. Turns a video content idea into a word-for-word two-column A/V script with a shot list, through five gated phases: intake, research, outline, script, handoff.",
+  "description": "Content skills bundle: nanocrt (nano Content Research Tool - idea-first, turns a video idea into a two-column A/V script) and nanostory (nano Story Tool - footage-first, turns a folder of existing travel footage into a narrated script plus an editor-ready timeline plan). Both run five approval-gated phases.",
   "author": {
     "name": "Arinadi Rohmad"
   },

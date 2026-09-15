@@ -71,6 +71,24 @@ video's angle. One or two sentences the Phase 2 outline can act on directly. If 
 Phase 0 keyword conflicts with what the audience actually searches, say so here —
 that is a finding, not a problem to hide.
 
+### Storytelling implication (feeds the storytelling preferences)
+
+When `story_structure`, `universal_value`, or `foreshadowing` is `unset` in
+Phase 0, this research decides them. Record a short note the outline can consume:
+
+- **Universal value** — which of `zero-to-hero` / `underdog` / `transformation` /
+  `redemption` (or `none`) this topic and audience most naturally support, and one
+  concrete detail that anchors it. Base it on the facts found, not a guess.
+- **Foreshadowing fit** — whether the topic has a natural early-clue/late-reveal
+  (e.g. a surprising result worth hinting at) or whether forcing one would distort
+  the facts. `on` only when a clean payoff is plausible.
+- **Structure fit** — whether the facts can fill a Rising Action and a single
+  climax (`five-part` / `on-a-day`) or the topic is purely instructional
+  (`none`).
+
+If a value is already set in Phase 0, confirm or correct it here with evidence
+rather than restating it.
+
 ---
 
 ## Write

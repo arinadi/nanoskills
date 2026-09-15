@@ -47,6 +47,19 @@ undecided. Mark each answer clearly.
 If a mandatory answer is missing or unusable, ask for that one again specifically.
 Do not proceed with five answers when you have seven.
 
+### Storytelling preferences (optional, three)
+
+Ask these with the seven above — one numbered message. Unlike the mandatory
+fields, each of these may legitimately be answered **"unset"**, meaning "the
+research or a later phase decides". See `references/storytelling.md` for the
+vocabulary these answers draw on.
+
+| # | Field | A usable answer | Default when unset |
+|---|---|---|---|
+| 8 | **Story structure** | `five-part` \| `on-a-day` \| `none` (pure argument, no arc) | `on-a-day` (simplest, most flexible) |
+| 9 | **Universal value** | `zero-to-hero` \| `underdog` \| `transformation` \| `redemption` \| `none` | Let Phase 1/2 infer from the topic; `none` only if the topic is purely instructional |
+| 10 | **Foreshadowing** | `on` \| `off` | `off` unless the topic has a natural reveal |
+
 Wait for the answers. If a preference is genuinely not known by the user (e.g. they
 have no keyword yet), record it as "unset" rather than inventing one — Phase 4 will
 check against it as a gap.
@@ -86,6 +99,8 @@ The working folder is `<project>_crt/` — create it if it does not exist.
 - The initial idea, verbatim
 - Reference inventory: file, contributes, settles
 - The seven preferences and their answers, verbatim
+- The three storytelling preferences and their answers (story_structure,
+  universal_value, foreshadowing)
 - The chosen language, explicitly
 - Phase flow record (5 phases)
 

@@ -15,14 +15,16 @@
 
   // OpenCode V2 permission syntax.
   "permissions": [
-    { "action": "skill", "resource": "nanocrt", "effect": "allow" }
+    { "action": "skill", "resource": "nanocrt", "effect": "allow" },
+    { "action": "skill", "resource": "nanostory", "effect": "allow" }
   ]
 
   // OpenCode V1 uses a different shape. If you are on V1, replace the
   // "permissions" array above with:
   //
-  //   "permission": { "skill": { "*": "ask", "nanocrt": "allow" } }
+  //   "permission": { "skill": { "*": "ask", "nanocrt": "allow", "nanostory": "allow" } }
   //
   // On V2 the skill ID comes from the directory name, not the frontmatter
-  // `name` field. The directory is `skills/nanocrt`, so the ID is `nanocrt`.
+  // `name` field. The directories are `skills/nanocrt` and `skills/nanostory`,
+  // so the IDs are `nanocrt` and `nanostory`.
 }

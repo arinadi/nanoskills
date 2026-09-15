@@ -33,3 +33,11 @@ whose source could not be retrieved is marked `[unverified]`.*
 *What this research means for the video's angle. One or two sentences the Phase 2
 outline can act on directly. A keyword conflict found here is a finding, not a
 problem to hide.*
+
+## Storytelling implication
+
+*When Phase 0 left story_structure / universal_value / foreshadowing unset, this
+section decides them from the evidence: which universal value the topic and
+audience support (with one anchoring detail), whether foreshadowing has a clean
+payoff, and whether the facts can fill an arc (`five-part` / `on-a-day`) or the
+topic is purely instructional (`none`).*

@@ -16,8 +16,11 @@ greeting.*
 ## Scene list
 
 *Ordered. One idea per scene, one-sentence summary each. Count guided by target
-duration (~4–6 scenes per 60 seconds).*
+duration (~4–6 scenes per 60 seconds). Structure column labels the part each
+scene plays (Introduction / Rising Action / Climax / Resolution / Conclusion —
+or Dulu / Setiap hari / Tetapi suatu hari / Maka / Sejak saat itu for on-a-day;
+omit for structure `none`).*
 
-| # | Summary |
-|---|---|
-| 1 | |
+| # | Summary | Structure part |
+|---|---|---|
+| 1 | | |

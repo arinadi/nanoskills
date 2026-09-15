@@ -4,14 +4,44 @@
 beats, and an ordered scene list. This is the bridge where the angle implication
 from research becomes a concrete structure.
 
+**Load `references/storytelling.md` before writing.** The Phase 0 storytelling
+preferences (story_structure, universal_value, foreshadowing) are mandatory
+inputs here — beats are mapped onto the chosen story arc, not just listed.
+
 ## Build order
 
 1. **Hook** — the first ~10 seconds. One line that states the viewer's problem or
-   the most surprising fact. Not a greeting.
+   the most surprising fact. Not a greeting. When foreshadowing is `on`, the hook
+   or an early scene plants the clue/promise.
 2. **Beats** — the story or argument steps, in order. Each beat is one move: one
    claim made, one question raised, one turn. No beat mixes two moves.
 3. **Scene list** — map beats to scenes. Each scene gets a one-sentence summary and
    covers exactly one idea or step.
+
+## Story structure mapping
+
+After listing the beats, label each scene with the part of the chosen structure it
+plays, using the tables in `references/storytelling.md`:
+
+- `five-part` → Introduction / Rising Action / Climax / Resolution / Conclusion
+- `on-a-day` → Dulu / Setiap hari / Tetapi suatu hari / Maka / Sejak saat itu
+- `none` → beats stay a plain argument sequence; no arc labels
+
+Rules:
+
+- **Climax exists and is single.** Exactly one scene is the peak (or one
+  "Tetapi suatu hari" pivot) — the outline must name it explicitly. No plateau,
+  no climax-less structure.
+- **Rising Action escalates.** With `five-part`, there are ≥2 escalating problem
+  beats, each a step up from the last. With `on-a-day`, the routine beat is
+  painful/recurring before the pivot.
+- **Universal value is named.** When `universal_value` is set (or inferred), the
+  outline states where the value surfaces (typically the Conclusion / "Sejak saat
+  itu") and pairs it with a concrete, specific detail — never a generic claim.
+- **Foreshadowing is paid off.** When `foreshadowing` is `on`, the clue is in an
+  early scene, the payoff is in or after the climax scene, and the payoff scene
+  explicitly references the clue. If no clean payoff exists, say so and recommend
+  dropping foreshadowing rather than planting a forgotten clue.
 
 ## Rules
 
@@ -24,6 +54,10 @@ from research becomes a concrete structure.
   beats are ordered; the angle is the spine the beats hang on.
 - If the angle implication from `research.md` is missing or weak, **stop and flag
   it** — do not invent an angle in the outline.
+- The structure labels must not distort facts into a better arc. If the truth of
+  the topic cannot fill a Rising Action or a climax, the outline says so and the
+  structure is downgraded to `none` with a note — never fabricate tension to fit
+  the arc.
 
 ## Runtime is NOT computed here
 

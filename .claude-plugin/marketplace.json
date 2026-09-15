@@ -4,12 +4,12 @@
   "owner": {
     "name": "Arinadi Rohmad"
   },
-  "description": "Content research skills that turn a video idea into a shootable script. Portable across Claude Code and OpenCode.",
+  "description": "Content research skills that turn a video idea OR a folder of existing footage into a shootable, editor-ready script. Portable across Claude Code and OpenCode.",
   "plugins": [
     {
       "name": "nanocrt",
       "source": "./",
-      "description": "nano Content Research Tool. Five-phase workflow with a hard approval gate: intake, research, outline, script, handoff. Produces a two-column A/V script with word-for-word narration and a shot list.",
+      "description": "Content skills bundle: nanocrt (idea-first: video idea to two-column A/V script) and nanostory (footage-first: existing travel footage to narrated script + edit plan). Both run five gated phases.",
       "category": "content"
     }
   ]
