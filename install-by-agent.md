@@ -1,5 +1,9 @@
 # Install nanoskills by agent
 
+You are installing three agent skills that share one workflow. Read the whole
+file first, then follow it in order — the one thing that breaks the install is
+mistaking the repo root for a skill.
+
 Install the nanoskills bundle from https://github.com/arinadi/nanoskills
 
 Important: the repo root is NOT a skill. The skills live at skills/nanocrt/,

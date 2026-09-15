@@ -16,23 +16,46 @@ curl -sL https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-
 
 ---
 
-A bundle of **nano skills** — disk-first, five-phase, approval-gated workflows
-that turn an idea (or a folder of footage) into a structured deliverable. Three
-skills, one format:
+## The problem
 
-| Skill | Direction | Input | Output |
-|---|---|---|---|
-| **nanocrt** | idea-first | a video content idea | `script.md` (two-column A/V, word-for-word narration + shot list) |
-| **nanostory** | footage-first | a folder of travel footage/photos | `script.md` (A/V referencing real files) + `edit-plan.md` |
-| **nanoprd** | idea-first (code) | a product idea | `PRD.md`, `architecture.md`, `tasks/` (nanotasks) + `AGENT.md` handoff |
+You already know what you want. The hard part is getting it out of your head and
+into something a camera, an editor, or a coding agent can act on.
 
-All three model the same discipline: capture preferences before doing work,
-write every deliverable to disk, stop at a hard approval gate between phases, and
-never invent facts. They work in Claude Code, OpenCode, and claude.ai.
+So you type a prompt. You get something plausible. You type it again tomorrow and
+get something plausible and *different* — because nothing was decided, and nothing
+was written down.
+
+The failure is not the model. It is the missing process:
+
+- **Preferences are never captured**, so the output is generic.
+- **Decisions live in chat history**, so the next session re-invents them.
+- **There is no stop-and-check**, so you approve work you have not actually read.
+
+## The fix
+
+nanoskills is three agent skills that run on one shared discipline:
+
+> Decide first. Write it to disk. Stop until you reply `APPROVED`.
+
+Every phase leaves a file behind. Every fact is written once, in the earliest
+document that needs it. Nothing important lives only in a scrollback you will
+never find again.
+
+Three skills, one shape:
+
+| Skill | Start with | End with |
+|---|---|---|
+| **nanocrt** | a video content idea | `script.md` — two-column A/V, word-for-word narration + shot list |
+| **nanostory** | a folder of travel footage/photos | `script.md` referencing real files + `edit-plan.md` |
+| **nanoprd** | a product idea | `PRD.md`, `architecture.md`, `tasks/` (nanotasks) + `AGENT.md` |
+
+They work in Claude Code, OpenCode, and claude.ai.
 
 ---
 
 ## The shared shape
+
+Every skill walks the same five phases, and stops at a hard gate between each one:
 
 ```
 Phase 0  Intake & preferences  -> meta/context.md   (preferences sharpened before any work)
@@ -42,28 +65,32 @@ Phase 3  Script / plan         -> script.md | PRD.md + architecture.md
 Phase 4  Handoff & verify      -> gap report against preferences
 ```
 
-- **nanocrt** — content research: video idea → shootable script.
-  `research.md` (topic facts + audience/trend/keyword), `outline.md`,
-  `script.md`.
-- **nanostory** — footage-first sibling. The footage you already have decides
-  what story can be told. `catalog.md` (asset inventory via ffprobe + manifest),
-  `outline.md` (scenes anchored to real assets + footage gaps), `script.md`,
-  `edit-plan.md` (timeline order + coverage report).
-- **nanoprd** — product planning: idea → nanotasks. `PRD.md`, `architecture.md`,
-  `design.md`, `tasks/` (atomic, dependency-ordered), `AGENT.md` + `VERIFY.md`
-  for the implementing agent.
+What changes is the direction of the work:
 
-nanocrt and nanostory share `references/storytelling.md` so every video script
+- **nanocrt** is *idea-first*. You bring a topic; it researches the facts and the
+  audience, then writes a script you can shoot. `research.md` (topic facts +
+  audience/trend/keyword), `outline.md`, `script.md`.
+- **nanostory** is *footage-first*. You bring a folder, and the footage you
+  already have decides what story can be told. `catalog.md` (asset inventory via
+  ffprobe + your manifest), `outline.md` (scenes anchored to real assets +
+  footage gaps), `script.md`, `edit-plan.md` (timeline order + coverage report).
+- **nanoprd** is *idea-first for code*. You bring a product idea; it produces
+  `PRD.md`, `architecture.md`, `design.md`, and `tasks/` — atomic,
+  dependency-ordered nanotasks — plus `AGENT.md` + `VERIFY.md` for the
+  implementing agent.
+
+nanocrt and nanostory share `references/storytelling.md`, so every video script
 follows a Five-Part or On-a-Day arc, with optional foreshadowing and universal
-value. nanostory reuses that file via a relative path and therefore must be
-installed alongside nanocrt.
+value. nanostory reuses that file by relative path and must be installed
+alongside nanocrt.
 
 ---
 
 ## What it produces
 
-Working folders keep the skills' outputs apart: `<project>_crt/`,
-`<project>_story/`, `<project>_plan/` (nanoprd owns `_plan`).
+Each skill writes into its own folder, so three projects can sit side by side
+without colliding: `<project>_crt/`, `<project>_story/`, `<project>_plan/`
+(nanoprd owns `_plan`).
 
 ```text
 <project>_crt/
@@ -137,24 +164,25 @@ Zip each skill folder (`skills/nanocrt/`, `skills/nanostory/`,
 
 ## Use it
 
-From inside your project folder:
+From inside your project folder, just describe what you have:
 
-**nanocrt** (video idea → script):
+**nanocrt** — a video idea:
 - "buat script video tentang sejarah kopi indonesia"
 - "research konten video untuk topik kebiasaan belajar"
 - "naskah video untuk menjelaskan cara kerja blockchain"
 
-**nanostory** (footage → script + edit plan):
+**nanostory** — footage you already shot:
 - "buat script dari footage liburan di folder raw/"
 - "bikin naskah narasi dari video dan foto perjalanan"
 - "edit plan dari footage yang sudah ada"
 
-**nanoprd** (product idea → nanotasks):
+**nanoprd** — a product to build:
 - "I have an idea for a subscription tracker. Here are my notes in notes.md."
 - "Rencanakan proyek untuk aplikasi absensi."
 - "help me architect this" / "turn this into tickets"
 
-Each starts at Phase 0 and works down to its final deliverable.
+Each one starts at Phase 0 and walks down to its final deliverable. When it stops,
+read the file it wrote, then reply `APPROVED` — or send it back with a change.
 
 ---
 
@@ -187,6 +215,13 @@ nanoskills/
 Each `SKILL.md` uses only the six spec frontmatter fields and no Claude Code-only
 body syntax, so the same files work in all three targets.
 
-## License
+---
+
+## Why it sticks
+
+Plenty of tools can write you a script once. The difference here is where the
+work lands: on disk, in your project folder, in files you can read, diff, and
+keep. The next session picks up from those files instead of starting over — and
+you stay the one who approves each step.
 
 MIT — see [LICENSE](LICENSE).

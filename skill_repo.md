@@ -7,9 +7,13 @@ compatibility: Requires git. Optional - Claude Code 2.1+ for `claude plugin vali
 
 # Building an Installable Skill Repository
 
-You are building a repository that must install cleanly in **both** Claude Code
-and OpenCode. Work in the order below. Do not start with the manifest files —
-start with the skills themselves.
+A skill repo fails in the quietest way possible: it installs, it looks fine, and
+the skill never triggers. The usual cause is building around the one tool you
+happen to be using instead of the format all of them read.
+
+So build to the lowest common denominator — the open Agent Skills format — and
+layer each tool's install mechanism on top. Work in the order below. Do not start
+with the manifest files — start with the skills themselves.
 
 ## The compatibility rule that governs everything
 
