@@ -53,27 +53,35 @@ They work in Claude Code, OpenCode, and claude.ai.
 
 ---
 
-## The shared shape
+## The shared discipline
 
-Every skill walks the same five phases, and stops at a hard gate between each one:
+The skills share a working style, not one template:
+
+- **Decide first.** Preferences are captured before any work, so the output is
+  sharp instead of generic.
+- **Write to disk.** Every deliverable lands as a file in your project folder,
+  with `meta/context.md`, `meta/progress.json`, and `meta/execution-log.md`
+  tracking the run.
+- **Stop at every checkpoint.** Each phase ends with a hard gate — you reply
+  `APPROVED` or send it back. Nothing moves forward on a thumbs up.
+- **Never invent facts.** Every claim is sourced or flagged; no imaginary shots,
+  no invented requirements.
+
+The phases differ because the job differs:
 
 ```
-Phase 0  Intake & preferences  -> meta/context.md   (preferences sharpened before any work)
-Phase 1  Research / catalog    -> research.md | catalog.md
-Phase 2  Outline               -> outline.md        (hook, beats, ordered scenes)
-Phase 3  Script / plan         -> script.md | PRD.md + architecture.md
-Phase 4  Handoff & verify      -> gap report against preferences
+nanocrt    (idea -> script)         0 Intake -> 1 Research -> 2 Outline -> 3 Script -> 4 Handoff
+nanostory  (footage -> script+edit) 0 Intake -> 1 Catalog  -> 2 Outline -> 3 Script -> 4 Edit plan
+nanoprd    (idea -> nanotasks)      0 Intake -> 1 PRD -> 2 Architecture -> 3 Decomposition -> 4 Handoff
 ```
-
-What changes is the direction of the work:
 
 - **nanocrt** is *idea-first*. You bring a topic; it researches the facts and the
   audience, then writes a script you can shoot. `research.md` (topic facts +
   audience/trend/keyword), `outline.md`, `script.md`.
-- **nanostory** is *footage-first*. You bring a folder, and the footage you
-  already have decides what story can be told. `catalog.md` (asset inventory via
-  ffprobe + your manifest), `outline.md` (scenes anchored to real assets +
-  footage gaps), `script.md`, `edit-plan.md` (timeline order + coverage report).
+- **nanostory** is *footage-first*. The footage you already have decides what
+  story can be told. `catalog.md` (asset inventory via ffprobe + your manifest),
+  `outline.md` (scenes anchored to real assets + footage gaps), `script.md`,
+  `edit-plan.md` (timeline order + coverage report).
 - **nanoprd** is *idea-first for code*. You bring a product idea; it produces
   `PRD.md`, `architecture.md`, `design.md`, and `tasks/` — atomic,
   dependency-ordered nanotasks — plus `AGENT.md` + `VERIFY.md` for the
