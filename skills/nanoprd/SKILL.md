@@ -9,9 +9,7 @@ description: >
   every deliverable to disk. Use this when the user says: "plan a project",
   "I have an idea for an app", "write a PRD", "make a spec", "help me architect
   this", "break this down into tasks", "turn this into tickets", or asks for
-  module specs or a handoff prompt for a coding agent. Indonesian triggers:
-  "rencanakan proyek", "ide aplikasi", "buat PRD", "buat arsitektur",
-  "pecah jadi task".
+  module specs or a handoff prompt for a coding agent.
 license: MIT
 compatibility: >
   Requires an agent with file write access. WebSearch is optional. Without it,
@@ -465,6 +463,5 @@ Describe the problem:
 
 - "I have an idea for [project]."
 - "Plan a project for [name]."
-- "Rencanakan proyek untuk [nama]."
 
 nanoPRD opens with the discovery gate and works down to nanotasks from there.

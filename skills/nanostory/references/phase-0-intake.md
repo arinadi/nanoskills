@@ -61,8 +61,8 @@ is undecided. Mark each answer clearly.
 | 1 | **Footage location** | "The folder `raw/` — 47 videos, 12 photos" or an explicit file list |
 | 2 | **Mood** | "Documentary, calm and nostalgic" or "Energetic and upbeat travel" |
 | 3 | **Angle / story goal** | "This trip taught me to slow down" — the position, not the topic |
-| 4 | **Keyword** | The search phrase the video targets, e.g. "liburan ke jepang" |
-| 5 | **Language** | The language the final narration is written in |
+| 4 | **Keyword** | The search phrase the video targets, e.g. "japan trip vlog" |
+| 5 | **Language** | The language the final narration is written in. Defaults to **English**; choose Indonesian or any other only if the user explicitly asks |
 | 6 | **Target duration** | "8 minutes" — drives scene count and runtime checks later |
 | 7 | **Audience** | "Travel vlog viewers 20-35, mobile, want atmosphere not itinerary" |
 
@@ -87,7 +87,8 @@ check against it as a gap.
 
 ## Step 5 — Write
 
-Select the language default if none was chosen (ask, do not assume). Then write:
+Default the language to English if none was chosen (the user's explicit choice
+always wins; never assume a non-English default). Then write:
 
 ```
 <project>_story/meta/context.md

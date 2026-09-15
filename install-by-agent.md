@@ -1,6 +1,6 @@
 # Install nanoskills by agent
 
-You are installing three agent skills that share one workflow. Read the whole
+You are installing a set of agent skills that share one workflow. Read the whole
 file first, then follow it in order — the one thing that breaks the install is
 mistaking the repo root for a skill.
 

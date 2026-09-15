@@ -9,7 +9,7 @@
     {
       "name": "nanoskills",
       "source": "./",
-      "description": "nano skills bundle: nanocrt (idea-first video idea to two-column A/V script), nanostory (footage-first existing travel footage to narrated script + edit plan), nanoprd (product idea to nanotasks for a coding agent). All three run five gated phases with approval gates.",
+      "description": "nano skills bundle: nanocrt (idea-first video idea to two-column A/V script), nanostory (footage-first existing travel footage to narrated script + edit plan), nanoprd (product idea to nanotasks for a coding agent). All run five gated phases with approval gates.",
       "category": "content"
     }
   ]

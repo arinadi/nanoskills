@@ -19,7 +19,7 @@ Run each check against `script.md`, comparing to the preferences recorded in
 | 7 | **A/V completeness** — every row has both a visual cell and a word-for-word audio cell | A row with an empty or placeholder column |
 | 8 | **Story structure** — the script delivers the Phase 0 `story_structure` arc | `five-part`/`on-a-day` chosen but climax missing, flat Rising Action, or no conclusion takeaway |
 | 9 | **Foreshadowing payoff** (only if `foreshadowing` = `on`) — the early clue has a payoff row that references it | Clue planted, no payoff row; or payoff exists but never connects to the clue |
-| 10 | **Universal value** — the conclusion pairs the chosen `universal_value` with a concrete detail | Conclusion is a generic statement ("dan itu penting") with no named value or detail |
+| 10 | **Universal value** — the conclusion pairs the chosen `universal_value` with a concrete detail | Conclusion is a generic statement ("and that matters") with no named value or detail |
 
 ## Unsourced-claim flag
 

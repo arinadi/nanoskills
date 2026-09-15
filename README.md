@@ -33,7 +33,7 @@ The failure is not the model. It is the missing process:
 
 ## The fix
 
-nanoskills is three agent skills that run on one shared discipline:
+nanoskills is a set of agent skills that run on one shared discipline:
 
 > Decide first. Write it to disk. Stop until you reply `APPROVED`.
 
@@ -41,7 +41,7 @@ Every phase leaves a file behind. Every fact is written once, in the earliest
 document that needs it. Nothing important lives only in a scrollback you will
 never find again.
 
-Three skills, one shape:
+The skills, one shape:
 
 | Skill | Start with | End with |
 |---|---|---|
@@ -88,7 +88,7 @@ alongside nanocrt.
 
 ## What it produces
 
-Each skill writes into its own folder, so three projects can sit side by side
+Each skill writes into its own folder, so several projects can sit side by side
 without colliding: `<project>_crt/`, `<project>_story/`, `<project>_plan/`
 (nanoprd owns `_plan`).
 
@@ -167,18 +167,18 @@ Zip each skill folder (`skills/nanocrt/`, `skills/nanostory/`,
 From inside your project folder, just describe what you have:
 
 **nanocrt** — a video idea:
-- "buat script video tentang sejarah kopi indonesia"
-- "research konten video untuk topik kebiasaan belajar"
-- "naskah video untuk menjelaskan cara kerja blockchain"
+- "script a video about the history of coffee in Indonesia"
+- "research video content on study habits"
+- "write a video script explaining how blockchain works"
 
 **nanostory** — footage you already shot:
-- "buat script dari footage liburan di folder raw/"
-- "bikin naskah narasi dari video dan foto perjalanan"
-- "edit plan dari footage yang sudah ada"
+- "script from the trip footage in raw/"
+- "write a narration from my travel videos and photos"
+- "edit plan from the footage I already have"
 
 **nanoprd** — a product to build:
 - "I have an idea for a subscription tracker. Here are my notes in notes.md."
-- "Rencanakan proyek untuk aplikasi absensi."
+- "plan a project for an attendance app"
 - "help me architect this" / "turn this into tickets"
 
 Each one starts at Phase 0 and walks down to its final deliverable. When it stops,

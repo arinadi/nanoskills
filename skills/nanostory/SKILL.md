@@ -1,6 +1,6 @@
 ---
 name: nanostory
-description: "Turn a folder of existing travel footage and photos into a word-for-word narrated script plus an editor-ready timeline plan — footage-first instead of idea-first. Five gated phases: intake (footage folder, asset manifest, mood, angle, duration, language, audience, story structure), catalog (asset inventory + technical metadata), story outline (narrative arc anchored to the assets you actually have), script (two-column A/V referencing real asset files), edit plan (timeline order, transitions, coverage report). Use when the user says \"buat script dari footage/video liburan\", \"bikin naskah dari stok video/foto perjalanan\", \"script dari video yang sudah ada\", \"edit plan dari footage\", \"naskah video dari asset yang ada\", \"footage-driven script\"."
+description: "Turn a folder of existing travel footage and photos into a word-for-word narrated script plus an editor-ready timeline plan — footage-first instead of idea-first. Five gated phases: intake (footage folder, asset manifest, mood, angle, duration, language, audience, story structure), catalog (asset inventory + technical metadata), story outline (narrative arc anchored to the assets you actually have), script (two-column A/V referencing real asset files), edit plan (timeline order, transitions, coverage report). Use when the user says \"script from existing footage\", \"travel footage script\", \"narration for my clips\", \"edit plan from footage\", \"footage-driven script\"."
 license: MIT
 compatibility: Requires Claude Code or OpenCode v1.0.190+ for native skills. ffprobe is required for Phase 1 technical metadata (ships with ffmpeg). Reuses the storytelling reference from the nanocrt skill, which must be installed alongside.
 metadata:
@@ -94,7 +94,8 @@ sharp; a catalog without them is generic.
 
 The seven mandatory fields: **footage location** (folder or list of files),
 **mood**, **angle / story goal**, **keyword**, **language**, **target duration**,
-**audience**.
+**audience**. **Language defaults to English** — an Indonesian or other-language
+output is chosen explicitly by the user, never assumed.
 
 Three optional storytelling fields, reused from the `nanocrt` skill
 (`references/storytelling.md` there): **story structure**

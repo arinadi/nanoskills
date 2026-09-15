@@ -40,7 +40,7 @@ Honor the Phase 0 `story_structure` and `universal_value` (tables in
   generic closer like "and that's why it matters".
 - **Foreshadowing is seeded and paid off.** When Phase 0 `foreshadowing` is `on`:
   the early clue row and the payoff row both exist, and the payoff row explicitly
-  references the clue so the viewer connects them ("ingat tadi yang ..."). A clue
+  references the clue so the viewer connects them ("remember the earlier ..."). A clue
   without a payoff row is a defect, not an option.
 - **Emotion and pace track the mood.** The Phase 0 mood dictates sentence rhythm
   and word choice (punchy and short for energetic; longer and calmer for

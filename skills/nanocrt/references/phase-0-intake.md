@@ -40,7 +40,7 @@ undecided. Mark each answer clearly.
 | 2 | **Mood** | "Documentary, calm and trustworthy" or "Energetic and punchy" |
 | 3 | **Angle** | "Why local farmers lost the value chain" — a position, not the topic again |
 | 4 | **Keyword** | The search phrase the video targets, e.g. "kopi nusantara" |
-| 5 | **Language** | The language the final script is written in (Indonesian, English, ...) |
+| 5 | **Language** | The language the final script is written in. Defaults to **English**; choose Indonesian or any other only if the user explicitly asks |
 | 6 | **Target duration** | "10 minutes" — drives scene count and runtime checks later |
 | 7 | **Audience** | "Indonesian coffee enthusiasts, 18–35, watch on mobile" |
 
@@ -66,7 +66,8 @@ check against it as a gap.
 
 ## Step 4 — Write
 
-Select the language default if none was chosen (ask, do not assume). Then write:
+Default the language to English if none was chosen (the user's explicit choice
+always wins; never assume a non-English default). Then write:
 
 ```
 <project>_crt/meta/context.md

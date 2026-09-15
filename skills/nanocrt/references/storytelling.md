@@ -85,9 +85,9 @@ Rules when enabled:
 Storytelling is a tool that can manipulate feelings; keep it on the ethical side
 of the line:
 
-- **Tujuannya untuk kebaikan** — purpose benefits the audience, not just the
+- **Purpose serves good** — the purpose benefits the audience, not just the
   teller.
-- **Tidak merugikan orang lain** — no harm to others.
-- **Jujur dan transparan** — never invent facts or hide material information to
+- **Harms no one** — no harm to others.
+- **Honest and transparent** — never invent facts or hide material information to
   make the story land. This supersedes everything above: a perfect story arc does
   not excuse an unverified claim.

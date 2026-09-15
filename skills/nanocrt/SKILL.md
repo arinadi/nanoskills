@@ -1,6 +1,6 @@
 ---
 name: nanocrt
-description: "Turn a video content idea into a shootable script — word-for-word narration plus a shot list in the two-column A/V format, structured as a story (Five-Part or On-a-Day arc, optional foreshadowing and universal value, via a storytelling reference). Runs a five-phase, approval-gated workflow: intake (topic, mood, angle, keyword, language, duration, audience, plus story structure, universal value, foreshadowing), research (topic facts + audience/trend/keyword), outline, script, handoff. Use when the user wants to research a video idea, make a video script, write a naskah video, plan video content, or says \"buat script video\", \"research konten video\", \"naskah video\", \"video script\", \"content research\"."
+description: "Turn a video content idea into a shootable script — word-for-word narration plus a shot list in the two-column A/V format, structured as a story (Five-Part or On-a-Day arc, optional foreshadowing and universal value, via a storytelling reference). Runs a five-phase, approval-gated workflow: intake (topic, mood, angle, keyword, language, duration, audience, plus story structure, universal value, foreshadowing), research (topic facts + audience/trend/keyword), outline, script, handoff. Use when the user wants to research a video idea, write a video script, plan video content, or says \"video script\", \"content research\", \"script for a video\", \"video content research\"."
 license: MIT
 compatibility: Requires Claude Code or OpenCode v1.0.190+ for native skills. No runtime dependencies; research uses the host agent's web search and fetch tools.
 metadata:
@@ -82,7 +82,9 @@ whole point: research sharpened by stated preferences is sharp; research without
 them is generic.
 
 The seven mandatory fields: **topic**, **mood**, **angle**, **keyword**,
-**language**, **target duration**, **audience**.
+**language**, **target duration**, **audience**. **Language defaults to English**
+— an Indonesian or other-language output is chosen explicitly by the user, never
+assumed.
 
 Three optional storytelling fields (see `references/storytelling.md`):
 **story structure** (`five-part` / `on-a-day` / `none`), **universal value**
