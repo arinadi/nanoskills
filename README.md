@@ -5,13 +5,13 @@
 Paste this into any agent session — it fetches the install guide and follows it:
 
 ```text
-curl -sL https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md && echo && echo "--- Baca panduan di atas, lalu install nanoskills sesuai petunjuk itu ---"
+Read https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md and install nanoskills following it.
 ```
 
-Or, in one paste:
+Or fetch it yourself first:
 
-```text
-Baca https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md dan install nanoskills sesuai isinya.
+```bash
+curl -sL https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md
 ```
 
 ---
@@ -96,34 +96,11 @@ Working folders keep the skills' outputs apart: `<project>_crt/`,
 ### Fastest: hand this to your agent
 
 Already have an agent session open? Paste this and it will work out the right path
-for whichever tool it's running in:
+for whichever tool it's running in — the same text lives in
+[`install-by-agent.md`](install-by-agent.md):
 
 ```text
-Install the nanoskills bundle from https://github.com/arinadi/nanoskills
-
-Important: the repo root is NOT a skill. The skills live at skills/nanocrt/,
-skills/nanostory/, and skills/nanoprd/. Cloning the repo directly into a skills
-directory installs broken skills.
-
-1. Work out which agent you are. Check for ~/.claude, ~/.config/opencode,
-   .cursor, .codex, .windsurf, or .gemini.
-
-2. If you are Claude Code, use the plugin marketplace:
-       claude plugin marketplace add arinadi/nanoskills
-       claude plugin install nanoskills@nanoskills
-   Then skip to step 4.
-
-3. Otherwise, clone once and install the skill directories only:
-       git clone --depth 1 https://github.com/arinadi/nanoskills.git ~/src/nanoskills
-   Link ~/src/nanoskills/skills/* into your agent's skills directory. The repo
-   ships install.sh which does this for ~/.claude/skills (all skills in one run).
-
-4. Verify: <skills dir>/nanocrt/SKILL.md, nanostory/SKILL.md, and
-   nanoprd/SKILL.md must exist, and each frontmatter `name:` must match its
-   folder. nanostory needs nanocrt installed alongside it (it reuses the
-   storytelling reference).
-
-Report which path you took and where it landed. Do not touch my other skills.
+Read https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md and install nanoskills following it.
 ```
 
 ### OpenCode — one command, works on V1 and V2
