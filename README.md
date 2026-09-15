@@ -1,89 +1,76 @@
-# nanoCRT
+# nanoskills
 
-Turn a video content idea into a **shootable script** — word-for-word narration
-and a shot list, in the two-column A/V format — through a five-phase, approval-gated
-workflow.
-
-nanoCRT = **nano Content Research Tool**.
-
-The repo also ships **nanostory** — the same discipline, but **footage-first**:
-turn a folder of existing travel footage and photos into a word-for-word narrated
-script plus an editor-ready timeline plan.
-
-Both are Agent Skills, modeled on [nanoPRD](https://github.com/arinadi/nanoPRD):
-same disk-first, checkpoint-gated structure, aimed at content instead of code.
-Works in Claude Code, OpenCode, and claude.ai.
+A bundle of **nano skills** — disk-first, five-phase, approval-gated workflows
+that turn an idea (or a folder of footage) into a structured deliverable. Three
+skills, one format:
 
 | Skill | Direction | Input | Output |
 |---|---|---|---|
-| **nanocrt** | idea-first | a video idea | script.md (A/V) — shots you will shoot |
-| **nanostory** | footage-first | a folder of footage/photos | script.md (A/V referencing real files) + edit-plan.md |
+| **nanocrt** | idea-first | a video content idea | `script.md` (two-column A/V, word-for-word narration + shot list) |
+| **nanostory** | footage-first | a folder of travel footage/photos | `script.md` (A/V referencing real files) + `edit-plan.md` |
+| **nanoprd** | idea-first (code) | a product idea | `PRD.md`, `architecture.md`, `tasks/` (nanotasks) + `AGENT.md` handoff |
+
+All three model the same discipline: capture preferences before doing work,
+write every deliverable to disk, stop at a hard approval gate between phases, and
+never invent facts. They work in Claude Code, OpenCode, and claude.ai.
 
 ---
 
-## The problem it solves
-
-You research a video idea by hand — browsing, fact-checking, guessing what the
-audience wants — then write the script however it comes out that day. Hours per
-video, no repeatable process, and the script isn't always shootable as written.
-
-nanoCRD fixes this with a fixed five-phase path:
+## The shared shape
 
 ```
-Phase 0  Intake & preferences  -> meta/context.md     (topic, mood, angle, keyword, language, duration, audience)
-Phase 1  Research              -> research.md          (topic facts + audience/trend/keyword)
-Phase 2  Outline               -> outline.md           (hook, beats, ordered scene list)
-Phase 3  Script                -> script.md            (two-column A/V, word-for-word narration + shot list)
-Phase 4  Handoff & verify      -> gap report against your preferences
+Phase 0  Intake & preferences  -> meta/context.md   (preferences sharpened before any work)
+Phase 1  Research / catalog    -> research.md | catalog.md
+Phase 2  Outline               -> outline.md        (hook, beats, ordered scenes)
+Phase 3  Script / plan         -> script.md | PRD.md + architecture.md
+Phase 4  Handoff & verify      -> gap report against preferences
 ```
 
-## nanostory — footage-first sibling
+- **nanocrt** — content research: video idea → shootable script.
+  `research.md` (topic facts + audience/trend/keyword), `outline.md`,
+  `script.md`.
+- **nanostory** — footage-first sibling. The footage you already have decides
+  what story can be told. `catalog.md` (asset inventory via ffprobe + manifest),
+  `outline.md` (scenes anchored to real assets + footage gaps), `script.md`,
+  `edit-plan.md` (timeline order + coverage report).
+- **nanoprd** — product planning: idea → nanotasks. `PRD.md`, `architecture.md`,
+  `design.md`, `tasks/` (atomic, dependency-ordered), `AGENT.md` + `VERIFY.md`
+  for the implementing agent.
 
-`nanostory` flips the constraint direction: instead of a script that decides what
-to shoot, the footage you already have decides what story can be told.
-
-```
-Phase 0  Intake            -> meta/context.md    (footage folder, asset manifest, mood, angle, language, duration, audience)
-Phase 1  Catalog           -> catalog.md         (asset inventory: ffprobe metadata + content/quality assessment)
-Phase 2  Outline           -> outline.md         (hook, beats, scenes anchored to real assets + footage gaps)
-Phase 3  Script            -> script.md          (two-column A/V, visual column references [asset-id @ timecode])
-Phase 4  Edit plan         -> edit-plan.md       (timeline order, transitions, coverage report good/weak/filler)
-```
-
-Key difference: the agent cannot watch video, so Phase 0 collects a per-file
-manifest from the user, and Phase 1 reads technical metadata with ffprobe. Both
-skills share `references/storytelling.md` (from nanocrt) so every script follows a
-Five-Part or On-a-Day arc, with optional foreshadowing and universal value.
-
-Preferences are captured *before* research, so the research is sharp — not generic.
-The script comes out word-for-word, so you can shoot from it with minimal edits.
+nanocrt and nanostory share `references/storytelling.md` so every video script
+follows a Five-Part or On-a-Day arc, with optional foreshadowing and universal
+value. nanostory reuses that file via a relative path and therefore must be
+installed alongside nanocrt.
 
 ---
 
 ## What it produces
 
-**nanocrt** writes into `<project>_crt/`; **nanostory** writes into
-`<project>_story/` (neither uses `_plan` — nanoPRD owns that suffix):
+Working folders keep the skills' outputs apart: `<project>_crt/`,
+`<project>_story/`, `<project>_plan/` (nanoprd owns `_plan`).
 
 ```text
 <project>_crt/
 ├── research.md         Phase 1: topic facts + audience/trend/keyword, all sourced
 ├── outline.md          Phase 2: hook, beats, ordered scene list
 ├── script.md           Phase 3: two-column A/V script with runtime estimate
-└── meta/
-    ├── context.md         Phase 0 record: idea, preferences, reference inventory
-    ├── progress.json      phase state
-    └── execution-log.md   sequential narrative
+└── meta/               context.md, progress.json, execution-log.md
 
 <project>_story/
 ├── catalog.md          Phase 1: asset inventory + content/quality assessment
 ├── outline.md          Phase 2: hook, beats, scenes anchored to real assets + gaps
 ├── script.md           Phase 3: two-column A/V script referencing [asset-id @ timecode]
 ├── edit-plan.md        Phase 4: timeline order, transitions, coverage report
-└── meta/
-    ├── context.md         Phase 0 record: request, preferences, asset manifest
-    ├── progress.json      phase state
-    └── execution-log.md   sequential narrative
+└── meta/               context.md, progress.json, execution-log.md
+
+<project>_plan/
+├── PRD.md              Problem, user, differentiation, features, success criteria
+├── architecture.md     Stack, data model, components, dependency graph
+├── design.md           Design system                          (UI modes only)
+├── tasks/              Nanotasks, dependency-ordered, NN or NN.M
+├── AGENT.md            Directive for the implementing coding agent
+├── VERIFY.md           Acceptance contract — the agent does not edit this
+└── meta/               context.md, decisions.md, progress.json, execution-log.md
 ```
 
 ---
@@ -96,29 +83,29 @@ Already have an agent session open? Paste this and it will work out the right pa
 for whichever tool it's running in:
 
 ```text
-Install the nanoCRT skills from https://github.com/arinadi/nanoCRT
+Install the nanoskills bundle from https://github.com/arinadi/nanoskills
 
-Important: the repo root is NOT a skill. The skills live at skills/nanocrt/ and
-skills/nanostory/. Cloning the repo directly into a skills directory installs a
-broken skill.
+Important: the repo root is NOT a skill. The skills live at skills/nanocrt/,
+skills/nanostory/, and skills/nanoprd/. Cloning the repo directly into a skills
+directory installs broken skills.
 
 1. Work out which agent you are. Check for ~/.claude, ~/.config/opencode,
    .cursor, .codex, .windsurf, or .gemini.
 
 2. If you are Claude Code, use the plugin marketplace:
-       claude plugin marketplace add arinadi/nanoCRT
-       claude plugin install nanocrt@nanocrt
+       claude plugin marketplace add arinadi/nanoskills
+       claude plugin install nanoskills@nanoskills
    Then skip to step 4.
 
 3. Otherwise, clone once and install the skill directories only:
-       git clone --depth 1 https://github.com/arinadi/nanoCRT.git ~/src/nanoCRT
-   Link ~/src/nanoCRT/skills/nanocrt and ~/src/nanoCRT/skills/nanostory into
-   your agent's skills directory. The repo ships install.sh which does this for
-   ~/.claude/skills (both skills in one run).
+       git clone --depth 1 https://github.com/arinadi/nanoskills.git ~/src/nanoskills
+   Link ~/src/nanoskills/skills/* into your agent's skills directory. The repo
+   ships install.sh which does this for ~/.claude/skills (all skills in one run).
 
-4. Verify: <skills dir>/nanocrt/SKILL.md and <skills dir>/nanostory/SKILL.md
-   must exist, and each frontmatter `name:` must match its folder. nanostory
-   needs nanocrt installed alongside it (it reuses the storytelling reference).
+4. Verify: <skills dir>/nanocrt/SKILL.md, nanostory/SKILL.md, and
+   nanoprd/SKILL.md must exist, and each frontmatter `name:` must match its
+   folder. nanostory needs nanocrt installed alongside it (it reuses the
+   storytelling reference).
 
 Report which path you took and where it landed. Do not touch my other skills.
 ```
@@ -126,31 +113,32 @@ Report which path you took and where it landed. Do not touch my other skills.
 ### OpenCode — one command, works on V1 and V2
 
 ```bash
-git clone https://github.com/arinadi/nanoCRT.git ~/src/nanoCRT
-cd ~/src/nanoCRT && ./install.sh
+git clone https://github.com/arinadi/nanoskills.git ~/src/nanoskills
+cd ~/src/nanoskills && ./install.sh
 ```
 
-`install.sh` symlinks into `~/.claude/skills`, which both Claude Code and OpenCode
-read. On Windows without Developer Mode it copies instead — re-run after updates.
+`install.sh` symlinks every `skills/*/` into `~/.claude/skills`, which both Claude
+Code and OpenCode read. On Windows without Developer Mode it copies instead —
+re-run after updates.
 
 ### OpenCode V2 — via config instead of symlinks
 
 ```bash
-git clone https://github.com/arinadi/nanoCRT.git ~/src/nanoCRT
+git clone https://github.com/arinadi/nanoskills.git ~/src/nanoskills
 ```
 
 Then add to `~/.config/opencode/opencode.json`:
 
 ```jsonc
-{ "skills": ["~/src/nanoCRT/skills"] }
+{ "skills": ["~/src/nanoskills/skills"] }
 ```
 
 See `opencode.json.example` for the permission syntax (V1 vs V2).
 
 ### claude.ai and Cowork
 
-Zip `skills/nanocrt/` (and, separately, `skills/nanostory/`) and upload each in
-skills settings.
+Zip each skill folder (`skills/nanocrt/`, `skills/nanostory/`,
+`skills/nanoprd/`) separately and upload in skills settings.
 
 ---
 
@@ -158,15 +146,20 @@ skills settings.
 
 From inside your project folder:
 
-**nanocrt** (idea-first):
+**nanocrt** (video idea → script):
 - "buat script video tentang sejarah kopi indonesia"
 - "research konten video untuk topik kebiasaan belajar"
 - "naskah video untuk menjelaskan cara kerja blockchain"
 
-**nanostory** (footage-first):
+**nanostory** (footage → script + edit plan):
 - "buat script dari footage liburan di folder raw/"
 - "bikin naskah narasi dari video dan foto perjalanan"
 - "edit plan dari footage yang sudah ada"
+
+**nanoprd** (product idea → nanotasks):
+- "I have an idea for a subscription tracker. Here are my notes in notes.md."
+- "Rencanakan proyek untuk aplikasi absensi."
+- "help me architect this" / "turn this into tickets"
 
 Each starts at Phase 0 and works down to its final deliverable.
 
@@ -175,21 +168,26 @@ Each starts at Phase 0 and works down to its final deliverable.
 ## Repository layout
 
 ```text
-nanoCRT/
+nanoskills/
 ├── .claude-plugin/
 │   ├── marketplace.json
 │   └── plugin.json
 ├── skills/
 │   ├── nanocrt/
 │   │   ├── SKILL.md
-│   │   ├── references/       # loaded on demand, one per phase + storytelling
-│   │   └── templates/        # document skeletons
-│   └── nanostory/
+│   │   ├── references/       # one per phase + storytelling
+│   │   └── templates/
+│   ├── nanostory/
+│   │   ├── SKILL.md
+│   │   ├── references/       # one per phase
+│   │   └── templates/
+│   └── nanoprd/
 │       ├── SKILL.md
-│       ├── references/       # loaded on demand, one per phase
-│       └── templates/        # document skeletons
-├── install.sh
+│       ├── references/       # one per phase + state-files
+│       └── templates/
+├── install.sh                # symlinks every skill into ~/.claude/skills
 ├── opencode.json.example
+├── skill_repo.md             # the rules this repo is built to
 └── .github/workflows/validate.yml
 ```
 

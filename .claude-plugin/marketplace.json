@@ -1,15 +1,15 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "nanocrt",
+  "name": "nanoskills",
   "owner": {
     "name": "Arinadi Rohmad"
   },
-  "description": "Content research skills that turn a video idea OR a folder of existing footage into a shootable, editor-ready script. Portable across Claude Code and OpenCode.",
+  "description": "nano skills: turn a video idea (nanocrt), a folder of existing footage (nanostory), or a product idea (nanoprd) into a structured, editor- or agent-ready deliverable through five gated phases. Portable across Claude Code and OpenCode.",
   "plugins": [
     {
-      "name": "nanocrt",
+      "name": "nanoskills",
       "source": "./",
-      "description": "Content skills bundle: nanocrt (idea-first: video idea to two-column A/V script) and nanostory (footage-first: existing travel footage to narrated script + edit plan). Both run five gated phases.",
+      "description": "nano skills bundle: nanocrt (idea-first video idea to two-column A/V script), nanostory (footage-first existing travel footage to narrated script + edit plan), nanoprd (product idea to nanotasks for a coding agent). All three run five gated phases with approval gates.",
       "category": "content"
     }
   ]

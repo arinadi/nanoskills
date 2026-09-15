@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Install the nanoCRT skill for both Claude Code and OpenCode.
+# Install the nanoskills skills for both Claude Code and OpenCode.
 #
 # Both tools read ~/.claude/skills, so one link serves both. Claude Code resolves
 # a skill entry that is a symlink to a directory elsewhere on disk, and OpenCode
@@ -67,5 +67,5 @@ done
 
 echo
 echo "Done."
-echo "  Claude Code: restart your session, then ask it to research a video idea."
+echo "  Claude Code: restart your session, then ask it to research a video idea, plan a project, or script from footage."
 echo "  OpenCode:    skills load from ~/.claude/skills with no further config."

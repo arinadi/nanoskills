@@ -11,20 +11,21 @@
   "$schema": "https://opencode.ai/config.json",
 
   // Point at the skills directory of your clone.
-  "skills": ["~/src/nanoCRT/skills"],
+  "skills": ["~/src/nanoskills/skills"],
 
   // OpenCode V2 permission syntax.
   "permissions": [
     { "action": "skill", "resource": "nanocrt", "effect": "allow" },
-    { "action": "skill", "resource": "nanostory", "effect": "allow" }
+    { "action": "skill", "resource": "nanostory", "effect": "allow" },
+    { "action": "skill", "resource": "nanoprd", "effect": "allow" }
   ]
 
   // OpenCode V1 uses a different shape. If you are on V1, replace the
   // "permissions" array above with:
   //
-  //   "permission": { "skill": { "*": "ask", "nanocrt": "allow", "nanostory": "allow" } }
+  //   "permission": { "skill": { "*": "ask", "nanocrt": "allow", "nanostory": "allow", "nanoprd": "allow" } }
   //
   // On V2 the skill ID comes from the directory name, not the frontmatter
-  // `name` field. The directories are `skills/nanocrt` and `skills/nanostory`,
-  // so the IDs are `nanocrt` and `nanostory`.
+  // `name` field. The directories are skills/nanocrt, skills/nanostory, and
+  // skills/nanoprd, so the IDs are `nanocrt`, `nanostory`, and `nanoprd`.
 }

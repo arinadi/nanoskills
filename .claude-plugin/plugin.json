@@ -1,9 +1,9 @@
 {
-  "name": "nanocrt",
-  "description": "Content skills bundle: nanocrt (nano Content Research Tool - idea-first, turns a video idea into a two-column A/V script) and nanostory (nano Story Tool - footage-first, turns a folder of existing travel footage into a narrated script plus an editor-ready timeline plan). Both run five approval-gated phases.",
+  "name": "nanoskills",
+  "description": "nano skills bundle: nanocrt (nano Content Research Tool - idea-first, turns a video idea into a two-column A/V script), nanostory (nano Story Tool - footage-first, turns a folder of existing travel footage into a narrated script plus an editor-ready timeline plan), and nanoprd (nano PRD - turns a product idea into nanotasks a coding agent can implement one at a time). All run five approval-gated phases.",
   "author": {
     "name": "Arinadi Rohmad"
   },
-  "homepage": "https://github.com/arinadi/nanoCRT",
+  "homepage": "https://github.com/arinadi/nanoskills",
   "license": "MIT"
 }
