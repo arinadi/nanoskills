@@ -1,5 +1,21 @@
 # nanoskills
 
+## Quick install (hand to your agent)
+
+Paste this into any agent session — it fetches the install guide and follows it:
+
+```text
+curl -sL https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md && echo && echo "--- Baca panduan di atas, lalu install nanoskills sesuai petunjuk itu ---"
+```
+
+Or, in one paste:
+
+```text
+Baca https://raw.githubusercontent.com/arinadi/nanoskills/master/install-by-agent.md dan install nanoskills sesuai isinya.
+```
+
+---
+
 A bundle of **nano skills** — disk-first, five-phase, approval-gated workflows
 that turn an idea (or a folder of footage) into a structured deliverable. Three
 skills, one format:
