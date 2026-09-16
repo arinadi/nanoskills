@@ -4,10 +4,24 @@
 them on disk. Preferences captured here are what make the catalog sharp instead
 of generic.
 
-Five steps, in this order. The order is the point: reading references before
-asking means you ask only what is genuinely undecided.
+**Load the `nanocrt` skill's `references/asking.md` first.** The asking discipline
+governs this phase: confirm understanding, then ask, then record.
+
+Five steps, in this order. The order is the point: confirming the job and reading
+references before asking means you ask only what is genuinely undecided.
 
 ---
+
+## Step 0 — Confirm you understood the job
+
+Before any inventory or questions, restate the user's request back in one or two
+sentences and ask:
+
+> "To confirm I understood: you want a <duration> narrated video from the footage
+> in <folder>, for <audience>, told from <angle> — is that right?"
+
+Wait for a yes. If the user corrects it, incorporate the correction. A run that
+starts from a wrong understanding produces a perfect script for the wrong video.
 
 ## Step 1 — Record the request verbatim
 
@@ -85,6 +99,17 @@ Wait for the answers. If a preference is genuinely not known by the user (e.g. t
 have no keyword yet), record it as "unset" rather than inventing one — Phase 4 will
 check against it as a gap.
 
+When a preference stays unknown and the run needs it, mark it as an assumption
+instead of silently defaulting:
+
+```
+[ASSUMES: keyword = "japan trip vlog" until user provides one]
+```
+
+Each assumption is recorded in `context.md` with the reason it is assumed, and is
+listed in the Phase 0 checkpoint so the user can override it. See the `nanocrt`
+`references/asking.md`.
+
 ## Step 5 — Write
 
 Default the language to English if none was chosen (the user's explicit choice
@@ -119,6 +144,7 @@ The working folder is `<project>_story/` — create it if it does not exist.
 ## What `context.md` must contain
 
 - The initial request, verbatim
+- The confirmed understanding (Step 0), and any correction the user made
 - Footage folder / file list
 - Reference inventory: file, contributes, settles
 - The asset manifest (per-file descriptions), verbatim
@@ -126,6 +152,7 @@ The working folder is `<project>_story/` — create it if it does not exist.
 - The three storytelling preferences and their answers (story_structure,
   universal_value, foreshadowing)
 - The chosen language, explicitly
+- Every `[ASSUMES:]` marker and why it was assumed
 - Phase flow record (5 phases)
 
 ## Checkpoint

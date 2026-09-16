@@ -10,6 +10,12 @@ that belongs in the PRD or the architecture, stop - it means an earlier phase le
 a gap, and the right fix is to name it rather than to quietly settle it in the
 handoff document.
 
+**Assumption check.** Before finalizing, check every `[ASSUMES:]` marker recorded
+in `meta/context.md` against the finished plan. Report each one that influenced
+the architecture — either as confirmed (the plan honors it and the user accepted
+it) or as a gap (the assumption shaped a choice the user never signed off on).
+See `references/asking.md`.
+
 ---
 
 ## Context recovery - the rule that matters most

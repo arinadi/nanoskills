@@ -86,6 +86,12 @@ Phase 0, this research decides them. Record a short note the outline can consume
   climax (`five-part` / `on-a-day`) or the topic is purely instructional
   (`none`).
 
+**These decisions are not final until the user confirms them.** Follow
+`references/asking.md`: at the Phase 1 checkpoint, name each field research
+resolved, state the evidence, and ask the user to confirm or override. Record the
+outcome in `decisions.md`. Do not carry an inferred value into Phase 2 as if the
+user had chosen it.
+
 If a value is already set in Phase 0, confirm or correct it here with evidence
 rather than restating it.
 

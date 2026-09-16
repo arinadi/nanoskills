@@ -28,6 +28,13 @@ Scan the narration for factual statements that do not trace to a sourced claim i
 as a confident statement, flag it — the user must know the script leans on an
 unverified fact.
 
+## Assumption check
+
+Check every `[ASSUMES:]` marker recorded in `meta/context.md` against the final
+script. Report each one that influenced the output — either as confirmed (the
+script honors it and the user accepted it) or as a gap (the assumption shaped
+wording the user never signed off on). See `references/asking.md`.
+
 ## Report
 
 Produce the gap report as the phase's chat output (not a new document file):
@@ -38,11 +45,16 @@ Produce the gap report as the phase's chat output (not a new document file):
 
 The gap report is the final stop. Then finalize state:
 
+- Write `decisions.md` recording every confirmed or overridden choice.
 - Set every phase `approved` in `meta/progress.json`.
 - Append the final entry to `meta/execution-log.md`.
 
 Do not silently fix gaps you find — report them. The user decides whether to
-accept them or loop back to the phase that caused them.
+accept them or loop back to the phase that caused them. **Ask which one.** Close
+with the explicit question:
+
+> Reply APPROVED to accept this script as-is, or name the gap to fix and the
+> phase to loop back to (Research, Outline, or Script).
 
 ## Checkpoint
 

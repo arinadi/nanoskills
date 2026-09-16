@@ -57,10 +57,25 @@ preference it violates and the row in `script.md` where it shows. Do not silentl
 fix gaps — report them. The user decides whether to accept them, reword the
 narration, or plan added footage.
 
+## Assumption check
+
+Check every `[ASSUMES:]` marker recorded in `meta/context.md` against the final
+plan. Report each one that influenced the output — either as confirmed (the plan
+honors it and the user accepted it) or as a gap (the assumption shaped a choice
+the user never signed off on). See the `nanocrt` `references/asking.md`.
+
 ## Finalize
 
+- Write `decisions.md` recording every confirmed or overridden choice.
 - Set every phase `approved` in `meta/progress.json`.
 - Append the final entry to `meta/execution-log.md`.
+
+Do not silently fix gaps you find — report them. The user decides whether to
+accept them, reword the narration, or plan added footage. **Ask which one.** Close
+with the explicit question:
+
+> Reply APPROVED to accept this edit plan as-is, or name the gap to fix and the
+> phase to loop back to (Catalog, Outline, Script, or Edit plan).
 
 ## Checkpoint
 

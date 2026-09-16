@@ -5,6 +5,9 @@
 Everything downstream inherits from this phase. A wrong answer here is not
 discovered until Phase 3, when it has already been copied into every nanotask.
 
+**Load `references/asking.md` first.** The asking discipline governs this phase:
+confirm understanding, then research, then ask, then record.
+
 Four steps, in this order. The order is the point: research before questions means
 you ask about what is genuinely undecided, instead of asking the user to explain
 their own market back to you.
@@ -15,6 +18,15 @@ their own market back to you.
 
 The user has created a project folder, invoked nanoPRD from inside it, and given
 you an initial idea plus, usually, reference material.
+
+**Confirm you understood the job first.** Before inventory, restate the idea in
+one or two sentences and ask:
+
+> "To confirm I understood: you want to build <what> for <who>, because <why> —
+> is that right?"
+
+Wait for a yes. If the user corrects it, incorporate the correction. A plan built
+from a wrong understanding is a plan for the wrong product.
 
 **Record the initial idea verbatim.** Not your paraphrase of it. The original
 wording carries intent that a summary loses, and Phase 1 needs it.
@@ -135,6 +147,17 @@ Good sources for them:
 Wait for the answers. If a mandatory answer is missing or unusable, ask for that
 one again specifically. Do not proceed with five answers when you have three.
 
+When a requirement stays unknown and the run needs it, mark it as an assumption
+instead of silently defaulting:
+
+```
+[ASSUMES: budget = "small team, 1-3 engineers" until user provides one]
+```
+
+Each assumption is recorded in `context.md` with the reason it is assumed, and is
+listed in the Phase 0 checkpoint so the user can override it. See
+`references/asking.md`.
+
 ---
 
 ## Step 4 - Mode, constraints, and state
@@ -174,6 +197,7 @@ as a surprise in Phase 3.
 ## What `context.md` must contain
 
 - The initial idea, verbatim
+- The confirmed understanding (Step 1), and any correction the user made
 - Reference inventory: file, contributes, settles
 - Research findings: comparable products, technology notes, domain constraints
 - The five mandatory questions and their answers, verbatim
@@ -182,6 +206,7 @@ as a surprise in Phase 3.
 - Constraints: budget, timeline, team, regulatory
 - Asset audit (Extension and Rewrite only)
 - Deferred features, each with a one-line reason
+- Every `[ASSUMES:]` marker and why it was assumed
 
 ---
 

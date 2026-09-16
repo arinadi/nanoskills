@@ -35,11 +35,18 @@ The failure is not the model. It is the missing process:
 
 nanoskills is a set of agent skills that run on one shared discipline:
 
-> Decide first. Write it to disk. Stop until you reply `APPROVED`.
+> **Ask first. Decide second. Write to disk. Stop until you reply `APPROVED`.**
 
 Every phase leaves a file behind. Every fact is written once, in the earliest
 document that needs it. Nothing important lives only in a scrollback you will
 never find again.
+
+The asking discipline is what makes the output *yours* instead of generic: the
+agent confirms it understood the job before starting, asks about every preference
+and choice that changes the output, marks anything genuinely unknown with
+`[ASSUMES: ...]`, and ends every phase with an explicit confirmation gate —
+`APPROVED`, or which item to change. It lives in `references/asking.md`, shared
+across the three skills.
 
 The skills, one shape:
 
@@ -57,11 +64,16 @@ They work in Claude Code, OpenCode, and claude.ai.
 
 The skills share a working style, not one template:
 
+- **Ask first.** The agent confirms it understood the job, then asks about every
+  preference, confirmation, and choice that changes the output — nothing is
+  assumed silently. Unknowns are recorded as `[ASSUMES: ...]` markers the user can
+  override.
 - **Decide first.** Preferences are captured before any work, so the output is
-  sharp instead of generic.
+  sharp instead of generic. Anything inferred is surfaced for confirmation, never
+  buried.
 - **Write to disk.** Every deliverable lands as a file in your project folder,
-  with `meta/context.md`, `meta/progress.json`, and `meta/execution-log.md`
-  tracking the run.
+  with `meta/context.md`, `meta/progress.json`, `meta/decisions.md`, and
+  `meta/execution-log.md` tracking the run.
 - **Stop at every checkpoint.** Each phase ends with a hard gate — you reply
   `APPROVED` or send it back. Nothing moves forward on a thumbs up.
 - **Never invent facts.** Every claim is sourced or flagged; no imaginary shots,
@@ -77,11 +89,11 @@ nanoprd    (idea -> nanotasks)      0 Intake -> 1 PRD -> 2 Architecture -> 3 Dec
 
 - **nanocrt** (*nano Content Research Tool*) is *idea-first*. You bring a topic; it researches the facts and the
   audience, then writes a script you can shoot. `research.md` (topic facts +
-  audience/trend/keyword), `outline.md`, `script.md`.
+  audience/trend/keyword), `outline.md`, `script.md`, `decisions.md`.
 - **nanostory** is *footage-first*. The footage you already have decides what
   story can be told. `catalog.md` (asset inventory via ffprobe + your manifest),
   `outline.md` (scenes anchored to real assets + footage gaps), `script.md`,
-  `edit-plan.md` (timeline order + coverage report).
+  `edit-plan.md` (timeline order + coverage report), `decisions.md`.
 - **nanoprd** is *idea-first for code*. You bring a product idea; it produces
   `PRD.md`, `architecture.md`, `design.md`, and `tasks/` — atomic,
   dependency-ordered nanotasks — plus `AGENT.md` + `VERIFY.md` for the
@@ -105,6 +117,7 @@ without colliding: `<project>_crt/`, `<project>_story/`, `<project>_plan/`
 ├── research.md         Phase 1: topic facts + audience/trend/keyword, all sourced
 ├── outline.md          Phase 2: hook, beats, ordered scene list
 ├── script.md           Phase 3: two-column A/V script with runtime estimate
+├── decisions.md        Phase 4: confirmed choices + [ASSUMES:] outcomes
 └── meta/               context.md, progress.json, execution-log.md
 
 <project>_story/
@@ -112,6 +125,7 @@ without colliding: `<project>_crt/`, `<project>_story/`, `<project>_plan/`
 ├── outline.md          Phase 2: hook, beats, scenes anchored to real assets + gaps
 ├── script.md           Phase 3: two-column A/V script referencing [asset-id @ timecode]
 ├── edit-plan.md        Phase 4: timeline order, transitions, coverage report
+├── decisions.md        Phase 4: confirmed choices + [ASSUMES:] outcomes
 └── meta/               context.md, progress.json, execution-log.md
 
 <project>_plan/
@@ -189,8 +203,10 @@ From inside your project folder, just describe what you have:
 - "plan a project for an attendance app"
 - "help me architect this" / "turn this into tickets"
 
-Each one starts at Phase 0 and walks down to its final deliverable. When it stops,
-read the file it wrote, then reply `APPROVED` — or send it back with a change.
+Each one starts by confirming it understood the job, then runs Phase 0 down to
+its final deliverable. When it stops, read the file it wrote, then reply
+`APPROVED` — or send it back with a change. Every checkpoint is a question point:
+the agent names what needs confirming, and nothing moves until you answer.
 
 ---
 
@@ -204,15 +220,15 @@ nanoskills/
 ├── skills/
 │   ├── nanocrt/
 │   │   ├── SKILL.md
-│   │   ├── references/       # one per phase + storytelling
+│   │   ├── references/       # one per phase + storytelling + asking
 │   │   └── templates/
 │   ├── nanostory/
 │   │   ├── SKILL.md
-│   │   ├── references/       # one per phase
+│   │   ├── references/       # one per phase (reuses nanocrt's storytelling + asking)
 │   │   └── templates/
 │   └── nanoprd/
 │       ├── SKILL.md
-│       ├── references/       # one per phase + state-files
+│       ├── references/       # one per phase + state-files + asking
 │       └── templates/
 ├── install.sh                # symlinks every skill into ~/.claude/skills
 ├── opencode.json.example
@@ -222,6 +238,10 @@ nanoskills/
 
 Each `SKILL.md` uses only the six spec frontmatter fields and no Claude Code-only
 body syntax, so the same files work in all three targets.
+
+The asking discipline (`references/asking.md`) is shared: nanocrt holds the
+canonical copy, nanostory reuses it by relative path, and nanoprd keeps its own
+copy so it can be installed standalone.
 
 ---
 

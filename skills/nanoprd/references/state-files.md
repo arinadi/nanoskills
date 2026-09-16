@@ -98,7 +98,8 @@ correction with its own timestamp.
 The Phase 0 record. See `phase-0-context.md` for its required contents.
 
 It holds **what was said and what was found** - the idea verbatim, the reference
-inventory, research findings, and the questions with their answers as given.
+inventory, research findings, the questions with their answers as given, and every
+`[ASSUMES:]` marker with the reason it was assumed. See `references/asking.md`.
 
 `PRD.md` holds **what we decided to build**. It analyses the context; it does not
 transcribe it. If a sentence would be identical in both files, it belongs in

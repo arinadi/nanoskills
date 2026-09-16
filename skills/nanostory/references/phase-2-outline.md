@@ -42,6 +42,12 @@ Rules:
   payoff is anchored to a later asset that can deliver it. If the footage cannot
   pay it off, drop foreshadowing and say why.
 
+**Inferred storytelling fields are not final until confirmed.** If the outline
+resolves a `story_structure`, `universal_value`, or `foreshadowing` that Phase 0
+left `unset`, name it in the Phase 2 checkpoint, state the evidence, and ask the
+user to confirm or override before Phase 3. Record the outcome in `decisions.md`.
+Follow the `nanocrt` `references/asking.md`.
+
 ## Footage gaps are first-class output
 
 The outline must contain a **gap list**: every scene or beat the story wants but

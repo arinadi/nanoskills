@@ -86,6 +86,31 @@ Non-negotiable rules:
 Use **only these six frontmatter fields**: `name`, `description`, `license`,
 `compatibility`, `metadata`, `allowed-tools`.
 
+### Ask-first discipline for discovery-heavy skills
+
+Skills that turn a vague request into a deliverable (a script, a plan, a PRD)
+should embed an explicit asking discipline rather than hoping the model asks. A
+cheap pattern that works across all harnesses:
+
+- **Confirm the job first.** Before any work, restate the user's request in one
+  or two sentences and ask "is that what you want to produce?" A run that starts
+  from a wrong understanding is lost effort.
+- **Ask, never assume.** Ask about every preference, confirmation, and choice
+  that changes the output. When you infer something, surface it and ask the user
+  to confirm or override — do not bury it in a later deliverable.
+- **Record assumptions as `[ASSUMES: ...]`.** When a value is genuinely unknown,
+  write the assumption explicitly (in `context.md` or equivalent) so the user can
+  override it and the final phase can check whether it influenced the output.
+- **Every checkpoint is a question point.** End each gate with the specific
+  confirmation needed, not just "reply APPROVED". Name the items and invite
+  changes.
+- **Write the discipline in a shared `references/asking.md`** and load it in
+  Phase 0, the same way `storytelling.md` is shared in this repo.
+
+This repo does exactly that: see `skills/nanocrt/references/asking.md` (shared),
+`skills/nanoprd/references/asking.md` (standalone copy), and the Phase 0 files
+that load them.
+
 ```yaml
 ---
 name: git-release

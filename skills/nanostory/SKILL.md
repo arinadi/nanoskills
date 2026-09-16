@@ -2,10 +2,11 @@
 name: nanostory
 description: "Turn a folder of existing travel footage and photos into a word-for-word narrated script plus an editor-ready timeline plan — footage-first instead of idea-first. Five gated phases: intake (footage folder, asset manifest, mood, angle, duration, language, audience, story structure), catalog (asset inventory + technical metadata), story outline (narrative arc anchored to the assets you actually have), script (two-column A/V referencing real asset files), edit plan (timeline order, transitions, coverage report). Use when the user says \"script from existing footage\", \"travel footage script\", \"narration for my clips\", \"edit plan from footage\", \"footage-driven script\"."
 license: MIT
-compatibility: Requires Claude Code or OpenCode v1.0.190+ for native skills. ffprobe is required for Phase 1 technical metadata (ships with ffmpeg). Reuses the storytelling reference from the nanocrt skill, which must be installed alongside.
+compatibility: Requires Claude Code or OpenCode v1.0.190+ for native skills. ffprobe is required for Phase 1 technical metadata (ships with ffmpeg). Reuses the storytelling and asking references from the nanocrt skill, which must be installed alongside.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: Arinadi Rohmad
+allowed-tools: [Read, Write, Edit, Bash, Grep, Glob]
 ---
 
 # nanostory
@@ -43,10 +44,16 @@ These apply to every phase. They are not optional.
 5. **Keep state current.** Update `meta/progress.json` and append to
    `meta/execution-log.md` after every phase. A stale state file is worse than no
    state file, because the next session trusts it.
-6. **Do not guess about assets.** If a clip's content is unclear, ask the user to
+6. **Ask before you decide.** Asking is how you prove you understood the job.
+   Ask about every preference, every confirmation, and every choice that changes
+   the output — never assume. When you infer something (catalog or outline
+   resolves an `unset` field), surface it and ask the user to confirm or override.
+   Mark genuinely unknown preferences with `[ASSUMES: ...]` instead of carrying a
+   silent guess forward. Follow `../nanocrt/references/asking.md` in every phase.
+7. **Do not guess about assets.** If a clip's content is unclear, ask the user to
    describe it — you cannot watch video, and inventing what a shot shows produces
    a script that does not match the footage.
-7. **Never invent footage.** Every visual row in the script references a real
+8. **Never invent footage.** Every visual row in the script references a real
    asset from `catalog.md` by asset id and, where relevant, a timecode within that
    file. No imaginary shots, no "stock shot we can find later" without saying so
    explicitly as a gap.
@@ -68,6 +75,11 @@ script from the footage alone. If the user says "just start", explain that
 Phase 0 is what keeps the catalog and the script from being generic, then run
 Phase 0.
 
+Before any work, restate the user's request in one or two sentences and confirm
+it: "To confirm I understood: you want a <duration> narrated video from the
+footage in <folder>, for <audience>, told from <angle> — is that right?" Asking
+first means the rest of the run produces what they actually asked for.
+
 ---
 
 ## Phase protocol
@@ -86,11 +98,17 @@ Every phase runs the same five steps.
 
 ### Phase 0 — Intake and preferences
 
-**Load:** `references/phase-0-intake.md`, `templates/context.md`
+**Load:** `references/phase-0-intake.md`, `../nanocrt/references/asking.md`,
+`templates/context.md`
 
 Ask the user for their preferences before doing any work on the assets.
 Preferences are the whole point: a catalog sharpened by stated preferences is
 sharp; a catalog without them is generic.
+
+Before asking anything, **confirm you understood the job**: restate the user's
+request in one or two sentences and ask "Is that what you want to produce?" —
+asking means understanding what will be done. Only then move to preferences.
+Follow `../nanocrt/references/asking.md` exactly.
 
 The seven mandatory fields: **footage location** (folder or list of files),
 **mood**, **angle / story goal**, **keyword**, **language**, **target duration**,
@@ -108,7 +126,9 @@ Also collect the **asset manifest**: the user's per-file descriptions of what
 each clip/photo shows (place, moment, subject, rough quality). You cannot watch
 the footage; the manifest is how you see it.
 
-Write `meta/context.md` (creating `<project>_story/` first), then stop.
+Write `meta/context.md` (creating `<project>_story/` first). Record any preference
+the user could not answer as an `[ASSUMES: ...]` marker in `context.md` — never
+as a silent default. Then stop.
 
 **Checkpoint:**
 
@@ -122,17 +142,20 @@ PHASE 0 COMPLETE - Preferences recorded.
   Duration:    <target duration>
   Structure:   <story_structure, or unset>
   Manifest:    <count> asset description(s)
+  Assumptions: <count> [ASSUMES:] marker(s), if any
 
 Written to <project>_story/meta/context.md
 
-Review it, then reply APPROVED to continue to Phase 1 (Catalog).
+Confirm: the settings above match what you want, and each assumption is one
+you accept. Reply APPROVED, or tell me which one to change.
 ```
 
 ---
 
 ### Phase 1 — Catalog
 
-**Load:** `references/phase-1-catalog.md`, `templates/catalog.md`
+**Load:** `references/phase-1-catalog.md`, `../nanocrt/references/asking.md`,
+`templates/catalog.md`
 
 Inventory every asset in the footage folder. Two halves, both required:
 
@@ -157,7 +180,8 @@ PHASE 1 COMPLETE - Catalog written to <project>_story/catalog.md
   Usable:       <count> | Unusable: <count>
   Coverage:     <one-line note on what the footage can support>
 
-Review it, then reply APPROVED to continue to Phase 2 (Outline).
+Confirm: the catalog and coverage assessment match the footage you know.
+Reply APPROVED to continue, or tell me which asset row to change.
 ```
 
 ---
@@ -165,13 +189,18 @@ Review it, then reply APPROVED to continue to Phase 2 (Outline).
 ### Phase 2 — Story outline
 
 **Load:** `references/phase-2-outline.md`, `references/storytelling.md`
-(from `nanocrt`), `templates/outline.md`
+(from `nanocrt`), `../nanocrt/references/asking.md`, `templates/outline.md`
 
 Turn the catalog into a skeleton: a hook, the beats (story or argument steps),
 and an ordered scene list where each scene is anchored to the assets that
 actually exist. Scenes are labelled with the part of the Phase 0 story structure
 they play. Any gap between the desired story and the available footage is written
 down as a gap, not papered over.
+
+When the outline resolves a storytelling field left `unset` in Phase 0, surface
+that inference and ask for confirmation or an override before it becomes input to
+Phase 3 — do not write it into the script silently. Record the outcome in
+`decisions.md`.
 
 Write `outline.md`, then stop.
 
@@ -183,8 +212,10 @@ PHASE 2 COMPLETE - Outline written to <project>_story/outline.md
   Scenes:     <count>
   Hook:       <one line>
   Gaps:       <count> footage gap(s)
+  Decided:    <storytelling fields the outline resolved, if any>
 
-Review it, then reply APPROVED to continue to Phase 3 (Script).
+Confirm: the outline, its asset anchors, and any inferred storytelling
+choices are correct. Reply APPROVED to continue, or tell me what to change.
 ```
 
 ---
@@ -209,20 +240,26 @@ PHASE 3 COMPLETE - Script written to <project>_story/script.md
   Shots:      <count>
   Runtime:    <estimate>
 
-Review it, then reply APPROVED to continue to Phase 4 (Edit plan).
+Confirm: the script reads as you expect in the chosen language, and every
+visual row points at a real asset. Reply APPROVED to continue, or tell me
+which row to change.
 ```
 
 ---
 
 ### Phase 4 — Edit plan
 
-**Load:** `references/phase-4-editplan.md`
+**Load:** `references/phase-4-editplan.md`, `../nanocrt/references/asking.md`
 
 Turn the script into an editor-ready plan: the timeline order of every shot
 (referencing asset ids), transitions, pacing notes, and a **coverage report**
 marking each scripted moment `good` / `weak` / `filler` against the footage that
 exists. Report gaps as either "no gaps" or a specific numbered list. This is the
 final stop.
+
+Also check every `[ASSUMES:]` marker recorded in `context.md` against the final
+plan and report any that influenced the output — as a gap or a confirmation.
+Record all confirmed and overridden choices in `meta/decisions.md`.
 
 **Checkpoint:**
 
@@ -234,9 +271,13 @@ PHASE 4 COMPLETE - Script is ready to edit.
   outline.md         Hook, beats, scene list anchored to assets
   script.md          Two-column A/V script referencing real files
   edit-plan.md       Timeline order + coverage report
+  decisions.md       Confirmed choices and [ASSUMES:] outcomes
   meta/context.md    Preferences and manifest
 
 Gaps: <count> (or none)
+
+Reply APPROVED to accept, or tell me which gap to fix and I will loop back
+to the phase that caused it.
 ```
 
 ---
@@ -249,6 +290,7 @@ Gaps: <count> (or none)
 |-- outline.md       # Phase 2: hook, beats, scene list (anchored to assets)
 |-- script.md        # Phase 3: two-column A/V script with runtime estimate
 |-- edit-plan.md     # Phase 4: timeline order + coverage report
+|-- decisions.md     # confirmed choices + [ASSUMES:] outcomes
 `-- meta/
     |-- context.md       # Phase 0 record: idea, preferences, manifest
     |-- progress.json    # phase state
@@ -258,6 +300,12 @@ Gaps: <count> (or none)
 **Write each fact once.** If a sentence would be identical in two deliverables, it
 belongs in the earlier one and the later one cites it. Preferences live in
 `meta/context.md`; `script.md` cites them rather than restating them.
+
+**Ask, never assume.** The asking discipline in the `nanocrt`
+`references/asking.md` applies to every phase: confirm understanding before work,
+surface every inference for confirmation, and mark unknown preferences with
+`[ASSUMES: ...]`. `nanocrt` must be installed alongside for this reference and
+`references/storytelling.md` to resolve.
 
 ---
 
@@ -275,6 +323,7 @@ belongs in the earlier one and the later one cites it. Preferences live in
 
 Base directory for this skill: skills/nanostory
 Relative paths in this skill (e.g., references/, templates/) are relative to this
-base directory. The storytelling reference lives in the sibling skill:
-`../nanocrt/references/storytelling.md`. Both skills must be installed for it to
-resolve (install.sh installs the whole `skills/` tree together).
+base directory. The storytelling and asking references live in the sibling skill:
+`../nanocrt/references/storytelling.md` and `../nanocrt/references/asking.md`.
+Both skills must be installed for them to resolve (install.sh installs the whole
+`skills/` tree together).

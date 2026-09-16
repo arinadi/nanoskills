@@ -6,6 +6,13 @@
 
 *The user's initial idea exactly as given.*
 
+## Confirmed understanding
+
+*Step 0 restatement, and the user's confirmation or correction.*
+
+- You want: *restate the job in one or two sentences*
+- Confirmed by user: yes / no (→ *what they corrected*)
+
 ## Reference inventory
 
 | Reference | Contributes | Settles |
@@ -31,6 +38,15 @@
 | Story structure (five-part / on-a-day / none) | |
 | Universal value (zero-to-hero / underdog / transformation / redemption / none) | |
 | Foreshadowing (on / off) | |
+
+## Assumptions
+
+*[ASSUMES:] markers recorded in Phase 0. Each is listed in the checkpoint so the
+user can override it; Phase 4 checks whether it influenced the script.*
+
+| Marker | Why assumed | Status (open / confirmed / replaced) |
+|---|---|---|
+| `[ASSUMES: ...]` | | |
 
 ## Phase flow
 

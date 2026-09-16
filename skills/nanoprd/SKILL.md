@@ -16,7 +16,7 @@ compatibility: >
   Phase 1 competitor research and Phase 2 design-system lookup are skipped and
   recorded as skipped in the deliverables rather than guessed.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: arinadi
 allowed-tools: [Read, Write, Edit, Bash, Grep, Glob, WebSearch]
 ---
@@ -60,7 +60,13 @@ These apply to every phase. They are not optional.
    established in Phase 0, say so directly and offer a cheaper alternative that
    solves the underlying need. Do this the moment you hear the feature, not at
    review time.
-7. **Do not guess.** If a requirement is unclear, ask. An assumption written into
+7. **Ask before you decide.** Asking is how you prove you understood the job.
+   Ask about every requirement, every confirmation, and every choice that changes
+   the plan — never assume. When you infer something (research resolves the mode,
+   a reference answers a question), surface it and ask the user to confirm or
+   override. Mark genuinely unknown requirements with `[ASSUMES: ...]` instead of
+   carrying a silent guess forward. Follow `references/asking.md` in every phase.
+8. **Do not guess.** If a requirement is unclear, ask. An assumption written into
    a spec becomes a bug in the implementation three phases later.
 
 ---
@@ -76,6 +82,10 @@ You work in that folder. All deliverables go to `<project>_plan/` inside it.
 Do not answer the discovery questions on the user's behalf. Do not produce a PRD
 from the initial idea alone. If the user says "just start", explain that Phase 0
 is what keeps the plan from being generic, then run Phase 0.
+
+Before any work, restate the user's idea and confirm it: "To confirm I understood:
+you want to build <what> for <who>, because <why> — is that right?" Asking first
+means the run produces what they actually asked for.
 
 ---
 
@@ -95,11 +105,12 @@ Every phase runs the same five steps.
 
 ### Phase 0 - Intake, research, and discovery
 
-**Load:** `references/phase-0-context.md`, `references/state-files.md`
+**Load:** `references/phase-0-context.md`, `references/asking.md`,
+`references/state-files.md`
 
 Phase 0 runs four steps in this order. The order is the point: researching before
 asking means you ask about what is genuinely undecided, instead of asking the user
-to explain their own market back to you.
+to explain their own market back to you. Follow `references/asking.md` exactly.
 
 **Step 1 - Intake.**
 Record the user's initial idea verbatim. Then inventory the reference material:
@@ -143,7 +154,8 @@ one again specifically - do not proceed with five answers when you have three.
 Select the project mode. This decides whether Phase 2 produces a design document,
 and it sets the default validation commands that appear in every nanotask. Document
 constraints and existing assets. Flag every feature that sits outside the answer to
-question 3.
+question 3. Record any requirement the user could not answer as an `[ASSUMES: ...]`
+marker in `context.md` — never as a silent default.
 
 ```
 <project>_plan/meta/context.md
@@ -161,10 +173,12 @@ PHASE 0 COMPLETE - Context established.
   Refs read:  <count> reference file(s)
   Researched: <count> comparable product(s)
   Deferred:   <count> feature(s) moved out of scope
+  Assumptions: <count> [ASSUMES:] marker(s), if any
 
 Written to <project>_plan/meta/context.md
 
-Review it, then reply APPROVED to continue to Phase 1 (Requirements).
+Confirm: the mode, core feature, and any assumptions above are what you want.
+Reply APPROVED to continue to Phase 1 (Requirements), or tell me what to change.
 ```
 
 ---
@@ -210,10 +224,16 @@ Phase 2 (Architecture).
 
 ### Phase 2 - Architecture and design
 
-**Load:** `references/phase-2-architecture.md`, `templates/architecture.md`.
-Load `templates/design.md` only if the project mode has a user interface.
+**Load:** `references/phase-2-architecture.md`, `references/asking.md`,
+`templates/architecture.md`. Load `templates/design.md` only if the project mode
+has a user interface.
 
-**Execute:** Define the tech stack with pinned major versions. Define every data
+**Execute:** Ask about stack preferences before choosing one — the user carries
+the team's skills, hosting, and constraints. Ask a *choose* question ("Stack:
+Next.js, Django, or something else?") or a *confirm* question if a reference
+already decides it. Record the answer in `decisions.md`.
+
+Then define the tech stack with pinned major versions. Define every data
 entity and relationship up front - a data model discovered halfway through
 implementation forces a rewrite of every nanotask that touched the old shape.
 Produce the dependency graph as a Mermaid diagram. Document the risk chains:
@@ -242,6 +262,7 @@ PHASE 2 COMPLETE - Architecture written to <project>_plan/architecture.md
   Entities:      <count>
   Components:    <count>
   Risk chains:   <count>
+  Stack:         <the chosen stack, confirmed by user>
 
 Review the file(s), then reply APPROVED to continue to
 Phase 3 (Decomposition).
@@ -343,18 +364,23 @@ PHASE 3 COMPLETE - <count> nanotasks written to <project>_plan/tasks/
 
 Every nanotask is atomic and doable, and has binary acceptance checks.
 
-Review them, then reply APPROVED to continue to Phase 4 (Handoff).
+Confirm: the nanotask set and their ordering match the PRD and architecture.
+Reply APPROVED to continue to Phase 4 (Handoff), or name the tasks to change.
 ```
 
 ---
 
 ### Phase 4 - Handoff
 
-**Load:** `references/phase-4-handoff.md`, `templates/AGENT.md`,
-`templates/VERIFY.md`
+**Load:** `references/phase-4-handoff.md`, `references/asking.md`,
+`templates/AGENT.md`, `templates/VERIFY.md`
 
 **Execute:** Produce the directive the implementing coding agent will run against,
 and the verification contract that decides whether its work is accepted.
+
+Check every `[ASSUMES:]` marker in `context.md` against the finished plan and
+report any that influenced the architecture — as a confirmation or a gap. Record
+all confirmed and overridden choices in `meta/decisions.md`.
 
 `VERIFY.md` holds system-level, non-functional, and regression checks only. It does
 not copy the per-nanotask acceptance checks - those live in the nanotask files, and
@@ -390,6 +416,9 @@ PHASE 4 COMPLETE - Plan is ready.
   VERIFY.md           Acceptance contract
   reference/          API and library documentation
   meta/               Context, decisions, state, log
+
+Confirm: every file above is what you want, and each [ASSUMES:] marker has
+been resolved or accepted. Reply APPROVED to accept the plan.
 
 Hand AGENT.md to your coding agent to begin implementation.
 Track progress in meta/progress.json - every nanotask starts failing.
@@ -445,6 +474,9 @@ specific places:
 
 - **Be direct.** If an idea is weak, say which part and why. A planning agent that
   agrees with everything produces a plan nobody should follow.
+- **Ask, never assume.** The asking discipline in `references/asking.md` applies
+  to every phase: confirm understanding before work, surface every inference for
+  confirmation, and mark unknown requirements with `[ASSUMES: ...]`.
 - **Prefer diagrams to prose.** Any logic with more than three steps becomes a
   Mermaid diagram.
 - **Do not repeat yourself across documents.** If a fact belongs in

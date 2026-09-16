@@ -5,9 +5,22 @@ interface.
 
 Use `templates/architecture.md` and, conditionally, `templates/design.md`.
 
+**Load `references/asking.md`.** The stack is a *choose* question the user owns.
+
 ---
 
 ## Tech stack
+
+**Ask about stack preferences before choosing.** The user carries the team's
+skills, hosting, and constraints; the architecture should not invent a stack they
+cannot run. Ask:
+
+> "Stack: Next.js, Django, or something else?" (choose) — or, if a reference file
+> already decides it, "I took the stack from <reference> — confirm?"
+
+Record the answer and its reasoning in `decisions.md` before writing
+`architecture.md`. If the user has no preference, record that too and propose one
+with a one-line justification each — then confirm the proposal in the checkpoint.
 
 List every technology with a pinned major version: "Next.js 15.x", not "Next.js".
 
