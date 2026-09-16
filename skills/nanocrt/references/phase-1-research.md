@@ -99,9 +99,25 @@ rather than restating it.
 
 ## Write
 
-Write `research.md` using `templates/research.md`, then update
-`meta/progress.json` and append to `meta/execution-log.md`.
+Write `research.md` using `templates/research.md`.
+
+## Record
+
+Update `meta/progress.json` and append to `meta/execution-log.md`.
 
 ## Checkpoint
 
-Phase 1 output must be reviewed and approved by the user before Phase 2 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+If this phase resolved any `unset` storytelling fields, name them here and ask
+the user to confirm or override before Phase 2.
+
+```
+PHASE 1 COMPLETE - Research written to <project>_crt/research.md
+
+  Topic facts:   <count> sourced claim(s)
+  Angle note:    <one-line angle implication>
+  Decided:       <storytelling fields research resolved, if any>
+
+Confirm: the research and any inferred storytelling choices above are correct.
+Reply APPROVED to continue, or tell me which finding or choice to change.
+```

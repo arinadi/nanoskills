@@ -163,18 +163,20 @@ listed in the Phase 0 checkpoint so the user can override it. See
 ## Step 4 - Mode, constraints, and state
 
 **Select the project mode.** One only. It sets the validation defaults for every
-nanotask and decides whether Phase 2 produces a design document.
+nanotask and the shape of the Phase 2 design document.
 
-| Mode | Primary concern | Default validation | Design doc |
+| Mode | Primary concern | Default validation | Design focus |
 |---|---|---|---|
-| `web-app` | Scalability and UX | E2E (Playwright or Cypress), unit, build, lint | Yes |
-| `mobile` | Performance and platform fit | Device tests, platform build checks | Yes |
-| `cli-tool` | Speed and reliability | Integration tests, smoke tests, distribution check | No |
-| `data-pipeline` | Integrity and latency | Data validation, schema checks, dry runs | No |
-| `ml-service` | Accuracy and evaluation | Eval metrics, benchmarks, drift detection | No |
+| `web-app` | Scalability and UX | E2E (Playwright or Cypress), unit, build, lint | Design system: tokens, components, screens |
+| `mobile` | Performance and platform fit | Device tests, platform build checks | Design system: tokens, components, screens |
+| `cli-tool` | Speed and reliability | Integration tests, smoke tests, distribution check | Command surface, output, help; TUI if interactive |
+| `data-pipeline` | Integrity and latency | Data validation, schema checks, dry runs | Output contract: log shape, metrics, result format |
+| `ml-service` | Accuracy and evaluation | Eval metrics, benchmarks, drift detection | Output contract: result shape, error shape, dashboard |
 
-If the project spans two modes, pick the one carrying the user-facing risk and note
-the second in constraints. Do not select two.
+Design is produced for every mode in Phase 2. The distinction is *what it
+describes*, not *whether it exists*. If the project spans two modes, pick the one
+carrying the user-facing risk and note the second in constraints. Do not select
+two.
 
 **Constraint framework.** Document budget, timeline, team size, and any regulatory
 requirement (GDPR, HIPAA, PCI DSS, data residency).
@@ -210,6 +212,33 @@ as a surprise in Phase 3.
 
 ---
 
+## Write
+
+Write `meta/context.md` using this file's contents, plus `meta/progress.json` and
+`meta/execution-log.md`. Create `<project>_plan/` first. The state file shapes
+come from `references/state-files.md`.
+
+## Record
+
+Update `meta/progress.json` (Phase 0 in_progress -> written) and append to
+`meta/execution-log.md`.
+
 ## Checkpoint
 
-Phase 0 output must be reviewed and approved by the user before Phase 1 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 0 COMPLETE - Context established.
+
+  Mode:       <project mode>
+  Core:       <the one feature from question 3>
+  Refs read:  <count> reference file(s)
+  Researched: <count> comparable product(s)
+  Deferred:   <count> feature(s) moved out of scope
+  Assumptions: <count> [ASSUMES:] marker(s), if any
+
+Written to <project>_plan/meta/context.md
+
+Confirm: the mode, core feature, and any assumptions above are what you want.
+Reply APPROVED to continue to Phase 1 (Requirements), or tell me what to change.
+```

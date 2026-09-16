@@ -40,9 +40,9 @@ to read, in what order.
 **Tools and capabilities.** Which tools the agent needs and what each is for. If a
 tool is unavailable, what to do instead.
 
-**Context links.** Relative paths to `PRD.md`, `architecture.md`, `design.md` where
-one exists, `tasks/`, and `reference/`. Say when to read each. "Read the whole plan
-first" is bad advice - it fills the context window before any work starts.
+**Context links.** Relative paths to `PRD.md`, `architecture.md`, `design.md`,
+`tasks/`, and `reference/`. Say when to read each. "Read the whole plan first"
+is bad advice - it fills the context window before any work starts.
 
 **Data initialization.** How to get the system into a runnable state: migrations,
 seed data, fixtures, environment variables and where their values come from. Never
@@ -123,7 +123,37 @@ will otherwise take the shortest path:
 
 ---
 
+## Write
+
+Write `AGENT.md` using `templates/AGENT.md`, `VERIFY.md` using
+`templates/VERIFY.md`, and `meta/decisions.md` recording every confirmed and
+overridden choice.
+
+## Record
+
+Mark every phase complete in `meta/progress.json`, append the final entry to
+`meta/execution-log.md`.
+
 ## Checkpoint
 
-Phase 4 ends the workflow. The final checkpoint lists every produced file and tells
-the user to hand `AGENT.md` to their coding agent.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 4 COMPLETE - Plan is ready.
+
+<project>_plan/
+  PRD.md              Requirements
+  architecture.md     Stack, data model, dependencies, risks
+  design.md           Design (tokens, layout, wireframes)
+  tasks/              <count> nanotasks, all failing
+  AGENT.md            Directive for the implementing agent
+  VERIFY.md           Acceptance contract
+  reference/          API and library documentation
+  meta/               Context, decisions, state, log
+
+Confirm: every file above is what you want, and each [ASSUMES:] marker has
+been resolved or accepted. Reply APPROVED to accept the plan.
+
+Hand AGENT.md to your coding agent to begin implementation.
+Track progress in meta/progress.json - every nanotask starts failing.
+```

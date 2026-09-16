@@ -18,8 +18,7 @@ before any work starts.
 
 | When | Read |
 |---|---|
-| Once, at the start | `PRD.md`, `architecture.md` |
-| Once, at the start (UI modes) | `design.md` |
+| Once, at the start | `PRD.md`, `architecture.md`, `design.md` |
 | At the start of every session | `meta/progress.json` - what is still failing |
 | Before each nanotask | `tasks/NN-*.md` or `tasks/NN.M-*.md` for that nanotask only |
 | Before each nanotask | The code produced by the nanotasks it depends on |

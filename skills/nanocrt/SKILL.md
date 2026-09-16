@@ -4,7 +4,7 @@ description: "Turn a video content idea into a shootable script — word-for-wor
 license: MIT
 compatibility: Requires Claude Code or OpenCode v1.0.190+ for native skills. No runtime dependencies; research uses the host agent's web search and fetch tools.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   author: Arinadi Rohmad
 allowed-tools: [Read, Write, Edit, Bash, Grep, Glob, WebSearch]
 ---
@@ -87,186 +87,27 @@ Every phase runs the same five steps.
 5. Stop     print the checkpoint block and wait for APPROVED
 ```
 
----
-
-### Phase 0 — Intake and preferences
-
-**Load:** `references/phase-0-intake.md`, `references/asking.md`,
-`templates/context.md`
-
-Ask the user for their preferences before doing any research. Preferences are the
-whole point: research sharpened by stated preferences is sharp; research without
-them is generic.
-
-Before asking anything, **confirm you understood the job**: restate the user's
-idea in one or two sentences and ask "Is that what you want to produce?" — asking
-means understanding what will be done. Only then move to preferences. Follow
-`references/asking.md` exactly.
-
-The seven mandatory fields: **topic**, **mood**, **angle**, **keyword**,
-**language**, **target duration**, **audience**. **Language defaults to English**
-— an Indonesian or other-language output is chosen explicitly by the user, never
-assumed.
-
-Three optional storytelling fields (see `references/storytelling.md`):
-**story structure** (`five-part` / `on-a-day` / `none`), **universal value**
-(`zero-to-hero` / `underdog` / `transformation` / `redemption` / `none`),
-**foreshadowing** (`on` / `off`). These may be "unset" — the research and outline
-decide, and Phase 4 checks the result.
-
-Also inventory whatever reference material the user pointed at. Read each one and
-summarize one line each: what it contributes and what it settles. A question
-already answered by a reference is not asked again — state what you took and ask
-for confirmation.
-
-Write `meta/context.md` (creating `<project>_crt/` first). Record any preference
-the user could not answer as an `[ASSUMES: ...]` marker in `context.md` — never
-as a silent default. Then stop.
-
-**Checkpoint:**
-
-```
-PHASE 0 COMPLETE - Preferences recorded.
-
-  Topic:       <topic>
-  Mood:        <mood>
-  Angle:       <angle>
-  Language:    <language>
-  Duration:    <target duration>
-  Structure:   <story_structure, or unset>
-  Foreshadow:  <on/off, or unset>
-  Assumptions: <count> [ASSUMES:] marker(s), if any
-
-Written to <project>_crt/meta/context.md
-
-Confirm: the settings above match what you want, and each assumption is one
-you accept. Reply APPROVED, or tell me which one to change.
-```
+The phase map below tells you which file to load in step 1. The checkpoint block
+you print in step 5 lives at the end of that phase's reference file — read it
+there, do not invent it.
 
 ---
 
-### Phase 1 — Research
+## Phase map
 
-**Load:** `references/phase-1-research.md`, `references/asking.md`,
-`templates/research.md`
+Each phase loads its own reference file. Detail lives there, not in this file —
+read it when the phase starts, never from memory.
 
-Research the topic in two passes, both sharpened by the Phase 0 preferences:
+| Phase | Load | Produces |
+|---|---|---|
+| **0** Intake and preferences | `references/phase-0-intake.md`, `references/asking.md`, `templates/context.md` | `meta/context.md`, `meta/progress.json`, `meta/execution-log.md` |
+| **1** Research | `references/phase-1-research.md`, `references/asking.md`, `templates/research.md` | `research.md` |
+| **2** Outline | `references/phase-2-outline.md`, `references/storytelling.md`, `templates/outline.md` | `outline.md` |
+| **3** Script | `references/phase-3-script.md`, `references/storytelling.md`, `templates/script.md` | `script.md` |
+| **4** Handoff and verify | `references/phase-4-handoff.md`, `references/asking.md` | gap report (chat) + `meta/decisions.md` |
 
-1. **Topic facts** — accuracy and substance: what is true about this topic, what
-   matters, what a viewer must know. Every claim sourced.
-2. **Audience / trend / keyword** — who watches this, what is trending in the
-   niche, what the audience actually searches, and what that means for the angle.
-
-Before researching, run the web-access capability check documented in
-`references/phase-1-research.md`. Follow it exactly.
-
-Write `research.md`, then stop.
-
-When Phase 0 left a storytelling field `unset` and the research resolves it,
-surface that inference and ask for confirmation or an override before it becomes
-input to Phase 2 — do not write it into the outline silently. Record the outcome
-in `decisions.md`.
-
-**Checkpoint:**
-
-```
-PHASE 1 COMPLETE - Research written to <project>_crt/research.md
-
-  Topic facts:   <count> sourced claim(s)
-  Angle note:    <one-line angle implication>
-  Decided:       <storytelling fields research resolved, if any>
-
-Confirm: the research and any inferred storytelling choices above are correct.
-Reply APPROVED to continue, or tell me which finding or choice to change.
-```
-
----
-
-### Phase 2 — Outline
-
-**Load:** `references/phase-2-outline.md`, `references/storytelling.md`,
-`templates/outline.md`
-
-Turn the research into a skeleton: a hook, the beats (story or argument steps),
-and an ordered scene list where each scene has a one-sentence summary. Scenes are
-labelled with the part of the Phase 0 story structure they play. Scene count
-is guided by the target duration from Phase 0.
-
-Write `outline.md`, then stop.
-
-**Checkpoint:**
-
-```
-PHASE 2 COMPLETE - Outline written to <project>_crt/outline.md
-
-  Scenes:   <count>
-  Hook:     <one line>
-  Structure:<the arc delivered, if not `none`>
-
-Confirm: the outline and its story-structure mapping match what you want.
-Reply APPROVED to continue, or tell me which scene or beat to change.
-```
-
----
-
-### Phase 3 — Script
-
-**Load:** `references/phase-3-script.md`, `references/storytelling.md`,
-`templates/script.md`
-
-Expand each outline scene into one or more shots. Write the two-column A/V script:
-visual column (camera, on-screen text, B-roll) and audio column (word-for-word
-narration), one row per shot. Narration delivers the outline's story arc: a real
-climax, escalating tension, a conclusion that pairs the universal value with a
-concrete detail, and a paid-off foreshadowing clue when enabled. Compute the
-runtime line from the audio word count.
-
-Write `script.md` in the language chosen in Phase 0, then stop.
-
-**Checkpoint:**
-
-```
-PHASE 3 COMPLETE - Script written to <project>_crt/script.md
-
-  Shots:      <count>
-  Runtime:    <estimate>
-
-Confirm: the script reads as you expect in the chosen language.
-Reply APPROVED to continue, or tell me which row to change.
-```
-
----
-
-### Phase 4 — Handoff and verify
-
-**Load:** `references/phase-4-handoff.md`, `references/asking.md`
-
-Check the finished script against every Phase 0 preference — including the three
-storytelling fields (story structure arc, foreshadowing payoff when `on`,
-universal value in the conclusion). Report gaps: either
-"no gaps" or a specific numbered list. This is the final stop.
-
-Also check every `[ASSUMES:]` marker recorded in `context.md` against the final
-script and report any that influenced the output — as a gap or a confirmation.
-Record all confirmed and overridden choices in `meta/decisions.md`.
-
-**Checkpoint:**
-
-```
-PHASE 4 COMPLETE - Script is ready to shoot.
-
-<project>_crt/
-  research.md         Research, all claims sourced
-  outline.md          Hook, beats, scene list
-  script.md           Two-column A/V script
-  decisions.md        Confirmed choices and [ASSUMES:] outcomes
-  meta/context.md     Preferences and reference inventory
-
-Gaps: <count> (or none)
-
-Reply APPROVED to accept, or tell me which gap to fix and I will loop back
-to the phase that caused it.
-```
+Each reference file ends with its checkpoint block and the approval gate for that
+phase.
 
 ---
 

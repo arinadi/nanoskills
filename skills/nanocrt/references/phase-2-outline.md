@@ -66,9 +66,23 @@ exists. Scene count is the only duration-driven quantity at this stage.
 
 ## Write
 
-Write `outline.md` using `templates/outline.md`, then update `meta/progress.json`
-and append to `meta/execution-log.md`.
+Write `outline.md` using `templates/outline.md`.
+
+## Record
+
+Update `meta/progress.json` and append to `meta/execution-log.md`.
 
 ## Checkpoint
 
-Phase 2 output must be reviewed and approved by the user before Phase 3 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 2 COMPLETE - Outline written to <project>_crt/outline.md
+
+  Scenes:   <count>
+  Hook:     <one line>
+  Structure:<the arc delivered, if not `none`>
+
+Confirm: the outline and its story-structure mapping match what you want.
+Reply APPROVED to continue, or tell me which scene or beat to change.
+```

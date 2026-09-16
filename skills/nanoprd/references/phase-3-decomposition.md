@@ -195,8 +195,16 @@ is a question the implementing agent has to ask.
 3. **Requirements** - what must be true when this is done. Specific, not general.
 4. **Data and API** - entities touched, endpoints called or created, request and
    response shapes. Reference `architecture.md` rather than restating the model.
-5. **UI structure** - components, states, and empty and error states. UI modes only;
-   omit the section entirely for headless modes.
+5. **Interface structure** - what the user (or consuming system) sees and
+   interacts with, per the project mode:
+   - `web-app` / `mobile` — components, states, empty and error states,
+     referencing `design.md`.
+   - `cli-tool` — commands, flags, output layout, exit codes, prompts,
+     referencing `design.md`.
+   - `data-pipeline` / `ml-service` — output contract fields, result/error
+     shape, log lines, referencing `design.md`.
+   The section is always present in the shape the mode needs; the implementing
+   agent must not have to invent the interface from the architecture.
 6. **Technical notes** - the non-obvious parts. Chosen approach, known trap, the
    reason a simpler option was rejected.
 7. **Acceptance checks** - binary pass or fail, each with the exact command.
@@ -259,6 +267,43 @@ whether they pass; the file says what they are. See `state-files.md` for the sha
 
 ---
 
+## Write
+
+Write the nanotask files into `<project>_plan/tasks/`, using `templates/nanotask.md`:
+
+```
+<project>_plan/tasks/00-setup.md                     unsplit major
+<project>_plan/tasks/01-<behavior-slug>.md           unsplit major
+<project>_plan/tasks/03.1-<increment-slug>.md        split major: minors only,
+<project>_plan/tasks/03.2-<increment-slug>.md        no 03-*.md file
+...
+```
+
+Also populate `<project>_plan/reference/` with the API and library documentation
+the implementing agent will need — do this **before** writing any nanotask.
+
+## Record
+
+Write the nanotask ledger into `meta/progress.json` — one entry per nanotask,
+every one seeded `"status": "failing"`. Append to `meta/execution-log.md`.
+
 ## Checkpoint
 
-Every nanotask must be reviewed and approved by the user before Phase 4 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 3 COMPLETE - <count> nanotasks written to <project>_plan/tasks/
+
+  <behavior count> behaviors, <nanotask count> nanotasks
+
+  00-setup.md
+  01-<behavior-slug>.md
+  03.1-<increment-slug>.md
+  03.2-<increment-slug>.md
+  ...
+
+Every nanotask is atomic and doable, and has binary acceptance checks.
+
+Confirm: the nanotask set and their ordering match the PRD and architecture.
+Reply APPROVED to continue to Phase 4 (Handoff), or name the tasks to change.
+```

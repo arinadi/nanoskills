@@ -114,6 +114,25 @@ Phase 3, which means it will never be verified.
 
 ---
 
+## Write
+
+Write `PRD.md` using `templates/PRD.md`.
+
+## Record
+
+Update `meta/progress.json` and append to `meta/execution-log.md`.
+
 ## Checkpoint
 
-The PRD must be reviewed and approved by the user before Phase 2 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 1 COMPLETE - PRD written to <project>_plan/PRD.md
+
+  Core features:  <count>
+  Base features:  <count>
+  Challenged:     <count> feature(s), <count> accepted alternative(s)
+
+Open the file and review it, then reply APPROVED to continue to
+Phase 2 (Architecture).
+```

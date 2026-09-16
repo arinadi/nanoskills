@@ -85,24 +85,53 @@ component boundary, because those are the ones no single nanotask will catch.
 
 ---
 
-## Design document - conditional
+## Design document - every mode
 
-Produce `design.md` **only** when the project mode is `web-app` or `mobile`.
+Produce `design.md` for every project mode. A product with no documented design
+is a product whose interface is whatever the implementing agent happened to
+imagine first. The shape of the document follows the mode, but the file always
+exists.
 
-For `cli-tool`, `data-pipeline`, and `ml-service`: skip this section entirely,
-skip the design-system search, and state in the Phase 2 checkpoint that the
-design document was skipped because the mode has no user interface.
+| Mode | `design.md` describes |
+|---|---|
+| `web-app` / `mobile` | Design system: tokens, components, states, screens |
+| `cli-tool` | Command surface, output streams, color, help layout, prompts, TUI layout |
+| `data-pipeline` / `ml-service` | Output contract: log shape, metrics, result format, error shape, dashboards |
 
 Set `design_doc` in `meta/progress.json` to match, in both directions. Consumers
 branch on that field, never on whether `design.md` happens to exist on disk - a
 file whose presence is the signal forces every reader to probe the filesystem
 before it can decide what to do.
 
-A design document written for a headless service is a file that every later agent
-must read and none can use. It is not free - it costs context on every subsequent
-turn.
+### Ask design preferences first
 
-### Design system research (UI modes only)
+Before writing, ask the design preferences as one numbered message, following
+`references/asking.md`. Do not invent a design direction the user has to reject.
+
+**Universal (every mode):**
+
+| # | Question | A usable answer |
+|---|---|---|
+| 1 | **Mood / aesthetic direction** | "Calm and technical" or "playful and friendly" - not "nice" |
+| 2 | **Reference products** | 1-3 named products whose style is admired, and what is liked about each |
+| 3 | **Anti-patterns** | What it must NOT look like - "avoid dashboard clutter", "not enterprisey grey" |
+| 4 | **Theme** | light / dark / both |
+| 5 | **Brand color** | A hex or a named system; "none, pick sensibly" is acceptable |
+| 6 | **Information density** | Dense (power users) or spacious (occasional users) |
+
+**Mode-specific:**
+
+| Mode | Extra question |
+|---|---|
+| `web-app` / `mobile` | Responsive floor: which viewport must work first? |
+| `cli-tool` | Interactivity level: batch / interactive prompts / full TUI? Keyboard conventions for TUI? |
+| `data-pipeline` | Who reads the output - a human operator, a dashboard, or another system? |
+| `ml-service` | What consumes the result, and what does a wrong result look like? |
+
+A question already answered by a reference file is confirmed, not re-asked. Record
+all answers in `decisions.md`.
+
+### Design system research (web-app and mobile only)
 
 Search for a design system that matches the product's mood and the Phase 0 user.
 [awesome-design-md](https://github.com/voltagent/awesome-design-md) is a useful
@@ -115,9 +144,51 @@ apps is the wrong choice for a tool a compliance officer uses for six hours a da
 If WebSearch is unavailable, define the tokens directly and record that no
 external system was referenced.
 
+### ASCII wireframes - one per core interface
+
+End every design document with **one ASCII wireframe per core interface**, 60-80
+columns wide, drawn with box-drawing characters, in a fenced code block. A core
+interface is:
+
+- `web-app` / `mobile` — each primary screen.
+- `cli-tool` — each command's output and help layout; the TUI screen if the tool
+  is interactive.
+- `data-pipeline` / `ml-service` — the log/metrics dashboard or config surface if
+  one exists; otherwise the result shape as an annotated example.
+
+Each wireframe labels its regions and carries interaction notes beneath it. The
+wireframe is the interface made visible; without one, the implementing agent
+rebuilds the layout from prose, and two nanotasks can end up with two different
+layouts.
+
 ---
+
+## Write
+
+Write `architecture.md` using `templates/architecture.md`, and `design.md` using
+`templates/design.md`. Record the stack choice and every design preference answer
+in `meta/decisions.md`.
+
+## Record
+
+Update `meta/progress.json` (set `design_doc` to the mode's design shape:
+`design-system`, `cli-surface`, or `output-contract`) and append to
+`meta/execution-log.md`.
 
 ## Checkpoint
 
-Architecture, and the design document where one was produced, must be reviewed and
-approved by the user before Phase 3 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 2 COMPLETE - Architecture and design written to <project>_plan/
+
+  Entities:      <count>
+  Components:    <count>
+  Risk chains:   <count>
+  Stack:         <the chosen stack, confirmed by user>
+  Design mode:   <design.md shape for this mode>
+  Wireframes:    <count> ASCII wireframe(s)
+
+Review the file(s), then reply APPROVED to continue to
+Phase 3 (Decomposition).
+```

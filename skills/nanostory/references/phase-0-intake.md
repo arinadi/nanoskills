@@ -155,6 +155,29 @@ The working folder is `<project>_story/` — create it if it does not exist.
 - Every `[ASSUMES:]` marker and why it was assumed
 - Phase flow record (5 phases)
 
+## Record
+
+Update `meta/progress.json` (Phase 0 in_progress -> written) and append to
+`meta/execution-log.md`.
+
 ## Checkpoint
 
-Phase 0 output must be reviewed and approved by the user before Phase 1 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 0 COMPLETE - Preferences recorded.
+
+  Footage:     <folder or file list>
+  Mood:        <mood>
+  Angle:       <angle / story goal>
+  Language:    <language>
+  Duration:    <target duration>
+  Structure:   <story_structure, or unset>
+  Manifest:    <count> asset description(s)
+  Assumptions: <count> [ASSUMES:] marker(s), if any
+
+Written to <project>_story/meta/context.md
+
+Confirm: the settings above match what you want, and each assumption is one
+you accept. Reply APPROVED, or tell me which one to change.
+```

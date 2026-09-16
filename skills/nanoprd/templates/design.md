@@ -1,59 +1,96 @@
-# Design System: [Project Name]
+# Design: [Project Name]
 
-> Written by nanoPRD Phase 2, for `web-app` and `mobile` modes only.
-> If the project mode is `cli-tool`, `data-pipeline`, or `ml-service`, this file
-> should not exist.
+> Written by nanoPRD Phase 2, for every project mode. The shape of this document
+> follows the mode, but the file always exists.
+>
+> - `web-app` / `mobile` — design system: tokens, components, states, screens.
+> - `cli-tool` — command surface, output streams, color, help layout, prompts,
+>   TUI layout where the tool is interactive.
+> - `data-pipeline` / `ml-service` — output contract: log shape, metrics, result
+>   format, error shape, dashboard or config surface.
+>
+> Preferences came from the Phase 2 questions; the raw answers live in
+> `meta/decisions.md`. Do not restate them here - carry the conclusion.
 
-## 1. Reference system
+## 1. Design direction
 
-*The design system this draws from, and why it fits this user. Chosen for the
-Phase 0 user, not for taste - a system built for consumer social apps is the wrong
-choice for a tool a compliance officer uses six hours a day.*
+*The user's stated direction in two or three sentences: mood, what it must feel
+like, what it must NOT look like. If any answer is missing, it was confirmed or
+overridden in `decisions.md`.*
 
-## 2. Theme and density
+- Mood / aesthetic:
+- Reference products:
+- Anti-patterns:
+- Theme: light / dark / both
+- Brand color:
+- Information density: dense / spacious
 
-*Mood, information density, design philosophy in two or three sentences.*
+## 2. [mode] - what this design describes
 
-## 3. Color palette
+*One paragraph naming the surface this design covers: for web-app/mobile the
+screens and components; for cli-tool the commands, output, help, and prompts;
+for data-pipeline/ml-service the log shape, metrics, result format, and error
+shape. If the mode spans two surfaces (a CLI with a TUI, a pipeline with a
+dashboard), list them here.*
 
-*Semantic names, not literal ones. `--color-danger`, never `--color-red` - the red
-will change and the meaning will not.*
+## 3. Tokens
 
-| Token | Light | Dark | Role |
-|---|---|---|---|
-| | | | |
+*Mode-appropriate tokens. For web-app/mobile: semantic color, typography, spacing,
+elevation. For cli-tool: semantic ANSI colors, monospace, spacing in `ch`. For
+headless modes: the fields and types of the output contract, and how failures are
+represented.*
 
-## 4. Typography
-
-| Role | Family | Size | Weight | Line height |
-|---|---|---|---|---|
-| | | | | |
-
-## 5. Spacing and layout
-
-*Spacing scale, grid, breakpoints. One scale, used everywhere.*
-
-## 6. Components
-
-*Each with every state: default, hover, focus, active, disabled, loading, error.
-A component specified without its states gets implemented without them.*
-
-| Component | States | Notes |
+| Token | Value | Role |
 |---|---|---|
 | | | |
 
-## 7. Elevation
+## 4. Layout and components
 
-*Shadow system and surface hierarchy. What sits above what, and why.*
+*The structural rules: grids, spacing, alignment for web/mobile; stdout/stderr
+split, pipe safety, help layout for a CLI; stream or record framing for headless.
+List the components with their states (default, focus, loading, error, empty for
+UI; success, partial, failure for output contracts).*
 
-## 8. Responsive behavior
+## 5. ASCII wireframes
 
-*Breakpoints, touch target minimums, what collapses and in what order.*
+*One wireframe per core interface, 60-80 columns wide, box-drawing characters,
+labelled regions, interaction notes beneath. A wireframe is the interface made
+visible - without one the implementing agent rebuilds the layout from prose.*
 
-## 9. Accessibility floor
+### Wireframe: [interface name]
 
-*The non-negotiable minimum: contrast ratio, focus visibility, keyboard reachability,
-motion preference. These become acceptance checks in Phase 3.*
+```
+┌───────────────────────────────────────────────────────────┐
+│                                                           │
+│                                                           │
+│                                                           │
+│                                                           │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+```
+
+- Region 1 (top): what it holds, why it leads
+- Region 2 (left): ...
+- Region 3 (centre): ...
+- Interaction: what happens on each primary action, including empty and error
+  states
+
+### Wireframe: [interface name]
+
+```
+┌───────────────────────────────────────────────────────────┐
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+```
+
+- ...
+
+## 6. Accessibility floor
+
+*The non-negotiable minimum. For web/mobile: contrast, focus visibility, keyboard
+reachability, motion preference. For cli-tool: NO_COLOR, TTY detection, keyboard
+reachability. For headless: machine-readability of output. These become
+acceptance checks in Phase 3.*
 
 | Requirement | Target | Checked by |
 |---|---|---|

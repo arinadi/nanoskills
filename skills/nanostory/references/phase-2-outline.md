@@ -75,9 +75,26 @@ finding, not a failure — the user decides how to close it.
 
 ## Write
 
-Write `outline.md` using `templates/outline.md`, then update `meta/progress.json`
-and append to `meta/execution-log.md`.
+Write `outline.md` using `templates/outline.md`.
+
+## Record
+
+Update `meta/progress.json` and append to `meta/execution-log.md`.
 
 ## Checkpoint
 
-Phase 2 output must be reviewed and approved by the user before Phase 3 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+If this phase resolved any `unset` storytelling fields, name them here and ask
+the user to confirm or override before Phase 3.
+
+```
+PHASE 2 COMPLETE - Outline written to <project>_story/outline.md
+
+  Scenes:     <count>
+  Hook:       <one line>
+  Gaps:       <count> footage gap(s)
+  Decided:    <storytelling fields the outline resolved, if any>
+
+Confirm: the outline, its asset anchors, and any inferred storytelling
+choices are correct. Reply APPROVED to continue, or tell me what to change.
+```

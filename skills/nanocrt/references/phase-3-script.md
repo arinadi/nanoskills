@@ -72,9 +72,22 @@ seconds per scene for transitions. This is a computed field, not a UI feature.
 
 ## Write
 
-Write `script.md` using `templates/script.md`, then update `meta/progress.json`
-and append to `meta/execution-log.md`.
+Write `script.md` using `templates/script.md`, in the language chosen in Phase 0.
+
+## Record
+
+Update `meta/progress.json` and append to `meta/execution-log.md`.
 
 ## Checkpoint
 
-Phase 3 output must be reviewed and approved by the user before Phase 4 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 3 COMPLETE - Script written to <project>_crt/script.md
+
+  Shots:      <count>
+  Runtime:    <estimate>
+
+Confirm: the script reads as you expect in the chosen language.
+Reply APPROVED to continue, or tell me which row to change.
+```

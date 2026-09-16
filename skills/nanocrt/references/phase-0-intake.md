@@ -132,6 +132,29 @@ The working folder is `<project>_crt/` — create it if it does not exist.
 - Every `[ASSUMES:]` marker and why it was assumed
 - Phase flow record (5 phases)
 
+## Record
+
+Update `meta/progress.json` (Phase 0 in_progress -> written) and append to
+`meta/execution-log.md`.
+
 ## Checkpoint
 
-Phase 0 output must be reviewed and approved by the user before Phase 1 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 0 COMPLETE - Preferences recorded.
+
+  Topic:       <topic>
+  Mood:        <mood>
+  Angle:       <angle>
+  Language:    <language>
+  Duration:    <target duration>
+  Structure:   <story_structure, or unset>
+  Foreshadow:  <on/off, or unset>
+  Assumptions: <count> [ASSUMES:] marker(s), if any
+
+Written to <project>_crt/meta/context.md
+
+Confirm: the settings above match what you want, and each assumption is one
+you accept. Reply APPROVED, or tell me which one to change.
+```

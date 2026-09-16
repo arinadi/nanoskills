@@ -95,8 +95,9 @@ nanoprd    (idea -> nanotasks)      0 Intake -> 1 PRD -> 2 Architecture -> 3 Dec
   `outline.md` (scenes anchored to real assets + footage gaps), `script.md`,
   `edit-plan.md` (timeline order + coverage report), `decisions.md`.
 - **nanoprd** is *idea-first for code*. You bring a product idea; it produces
-  `PRD.md`, `architecture.md`, `design.md`, and `tasks/` — atomic,
-  dependency-ordered nanotasks — plus `AGENT.md` + `VERIFY.md` for the
+  `PRD.md`, `architecture.md`, `design.md` (tokens + ASCII wireframes for every
+  mode — web, mobile, CLI, TUI, and headless output contracts), and `tasks/` —
+  atomic, dependency-ordered nanotasks — plus `AGENT.md` + `VERIFY.md` for the
   implementing agent.
 
 nanocrt and nanostory share `references/storytelling.md`, so every video script
@@ -131,7 +132,7 @@ without colliding: `<project>_crt/`, `<project>_story/`, `<project>_plan/`
 <project>_plan/
 ├── PRD.md              Problem, user, differentiation, features, success criteria
 ├── architecture.md     Stack, data model, components, dependency graph
-├── design.md           Design system                          (UI modes only)
+├── design.md           Design: tokens, layout, ASCII wireframes (every mode)
 ├── tasks/              Nanotasks, dependency-ordered, NN or NN.M
 ├── AGENT.md            Directive for the implementing coding agent
 ├── VERIFY.md           Acceptance contract — the agent does not edit this

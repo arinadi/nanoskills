@@ -79,6 +79,8 @@ with the explicit question:
 
 ## Checkpoint
 
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
 ```
 PHASE 4 COMPLETE - Script is ready to edit.
 
@@ -87,7 +89,11 @@ PHASE 4 COMPLETE - Script is ready to edit.
   outline.md         Hook, beats, scene list anchored to assets
   script.md          Two-column A/V script referencing real files
   edit-plan.md       Timeline order + coverage report
+  decisions.md       Confirmed choices and [ASSUMES:] outcomes
   meta/context.md    Preferences and manifest
 
 Gaps: <count> (or none)
+
+Reply APPROVED to accept, or tell me which gap to fix and I will loop back
+to the phase that caused it.
 ```

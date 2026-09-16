@@ -24,7 +24,7 @@ works.
 {
   "project": "<name>",
   "mode": "web-app",
-  "design_doc": true,
+  "design_doc": "design-system",
   "current_phase": 3,
   "phases": {
     "0": { "status": "approved",    "completed_at": "2026-01-01T00:00:00Z" },
@@ -48,8 +48,11 @@ works.
 **Phase status:** `pending`, `in_progress`, `written`, `approved`. A phase becomes
 `approved` only after the user has replied `APPROVED`.
 
-**`design_doc`:** set in Phase 0 from the project mode. Consumers branch on this
-field, never on whether `design.md` happens to exist on disk.
+**`design_doc`:** always `true` — `design.md` is produced for every mode in
+Phase 2. The field records the mode-specific design shape:
+`design-system` (web-app/mobile), `cli-surface` (cli-tool), or `output-contract`
+(data-pipeline/ml-service). Consumers branch on this field, never on whether
+`design.md` happens to exist on disk.
 
 ### The nanotask ledger
 

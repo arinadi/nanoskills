@@ -85,9 +85,23 @@ factual base the Phase 2 story must respect.
 
 ## Write
 
-Write `catalog.md` using `templates/catalog.md`, then update
-`meta/progress.json` and append to `meta/execution-log.md`.
+Write `catalog.md` using `templates/catalog.md`.
+
+## Record
+
+Update `meta/progress.json` and append to `meta/execution-log.md`.
 
 ## Checkpoint
 
-Phase 1 output must be reviewed and approved by the user before Phase 2 begins.
+Print this block, then stop. Do not continue until the user replies `APPROVED`.
+
+```
+PHASE 1 COMPLETE - Catalog written to <project>_story/catalog.md
+
+  Assets:       <count> file(s)
+  Usable:       <count> | Unusable: <count>
+  Coverage:     <one-line note on what the footage can support>
+
+Confirm: the catalog and coverage assessment match the footage you know.
+Reply APPROVED to continue, or tell me which asset row to change.
+```
